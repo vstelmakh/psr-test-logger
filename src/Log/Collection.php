@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
-namespace VStelmakh\TestLogger;
+namespace VStelmakh\TestLogger\Log;
 
-class LogCollection
+use VStelmakh\TestLogger\Assert\Proxy;
+
+class Collection
 {
     /** @var array<Log> */
     private array $logs = [];
@@ -49,6 +51,6 @@ class LogCollection
 
     public function assertNotEmpty(string $message): void
     {
-        $this->isEmpty() ? AssertProxy::fail($message) : AssertProxy::success();
+        $this->isEmpty() ? Proxy::fail($message) : Proxy::success();
     }
 }

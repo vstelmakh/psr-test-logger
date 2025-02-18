@@ -2,14 +2,15 @@
 
 declare(strict_types=1);
 
-namespace VStelmakh\TestLogger;
+namespace VStelmakh\TestLogger\Assert;
 
 use Psr\Log\LogLevel;
+use VStelmakh\TestLogger\Log\Collection;
 
 class Assert
 {
     public function __construct(
-        private readonly LogCollection $logs,
+        private readonly Collection $logs,
     ) {}
 
     public function hasLogs(): Matcher

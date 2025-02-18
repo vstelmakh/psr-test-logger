@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace VStelmakh\TestLogger;
+namespace VStelmakh\TestLogger\Assert;
 
 class Criteria implements \Stringable
 {

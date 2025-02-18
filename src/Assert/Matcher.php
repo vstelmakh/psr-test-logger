@@ -2,12 +2,15 @@
 
 declare(strict_types=1);
 
-namespace VStelmakh\TestLogger;
+namespace VStelmakh\TestLogger\Assert;
+
+use VStelmakh\TestLogger\Log\Log;
+use VStelmakh\TestLogger\Log\Collection;
 
 class Matcher
 {
     public function __construct(
-        private readonly LogCollection $logs,
+        private readonly Collection $logs,
         private readonly Criteria $criteria = new Criteria(),
     ) {}
 
@@ -35,7 +38,7 @@ class Matcher
         return new self($matches, $this->criteria);
     }
 
-    private function assertHasMatches(LogCollection $logs): void
+    private function assertHasMatches(Collection $logs): void
     {
         $logs->assertNotEmpty(sprintf('No logs matching %s.', $this->criteria));
     }

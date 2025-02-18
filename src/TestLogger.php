@@ -5,14 +5,17 @@ declare(strict_types=1);
 namespace VStelmakh\TestLogger;
 
 use Psr\Log\AbstractLogger;
+use VStelmakh\TestLogger\Assert\Assert;
+use VStelmakh\TestLogger\Log\Log;
+use VStelmakh\TestLogger\Log\Collection;
 
 class TestLogger extends AbstractLogger
 {
-    private LogCollection $logs;
+    private Collection $logs;
 
     public function __construct()
     {
-        $this->logs = new LogCollection();
+        $this->logs = new Collection();
     }
 
     public function log($level, \Stringable|string $message, array $context = []): void

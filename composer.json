@@ -1,0 +1,28 @@
+{
+    "name": "vstelmakh/test-logger",
+    "description": "Library providing PSR-3 compliant test logger",
+    "keywords": ["php", "log", "logger", "psr-3", "logging", "test"],
+    "type": "library",
+    "license": "MIT",
+    "homepage": "https://github.com/vstelmakh/test-logger",
+    "authors": [
+        {
+            "name": "Volodymyr Stelmakh",
+            "homepage": "https://github.com/vstelmakh"
+        }
+    ],
+    "require": {
+        "php": "^8"
+    },
+    "require-dev" : {},
+    "autoload": {
+        "psr-4": {
+            "VStelmakh\\TestLogger\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "VStelmakh\\TestLogger\\Tests\\": "tests/"
+        }
+    }
+}

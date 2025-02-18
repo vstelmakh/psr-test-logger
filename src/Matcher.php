@@ -8,10 +8,12 @@ class Matcher
 {
     public function __construct(
         private readonly LogCollection $logs,
-        /** @var array<string> */
-        private array $criteria = [],
+        private readonly Criteria $criteria = new Criteria(),
     ) {}
 
+    /**
+     * @return array<Log>
+     */
     public function getMatches(): array
     {
         return $this->logs->toArray();
@@ -19,7 +21,7 @@ class Matcher
 
     public function withLevel(mixed $level): self
     {
-        $this->addCriterion(sprintf('level "%s"', $level));
+        $this->criteria->add(sprintf('level "%s"', $level));
         $matches = $this->logs->filter(fn (Log $log) => $log->level === $level);
         $this->assertHasMatches($matches);
         return new self($matches, $this->criteria);
@@ -27,15 +29,10 @@ class Matcher
 
     public function withMessage(\Stringable|string $message): self
     {
-        $this->addCriterion(sprintf('message "%s"', $message));
+        $this->criteria->add(sprintf('message "%s"', $message));
         $matches = $this->logs->filter(fn (Log $log) => (string) $log->message === (string) $message);
         $this->assertHasMatches($matches);
         return new self($matches, $this->criteria);
-    }
-
-    private function addCriterion(string $criterion): void
-    {
-        $this->criteria[] = $criterion;
     }
 
     private function assertHasMatches(LogCollection $logs): void
@@ -45,7 +42,7 @@ class Matcher
 
             \PHPUnit\Framework\Assert::assertTrue(
                 $hasLogs,
-                sprintf('No logs matching %s.', implode(' and ', $this->criteria)),
+                sprintf('No logs matching %s.', $this->criteria),
             );
         }
     }

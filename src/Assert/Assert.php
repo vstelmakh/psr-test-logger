@@ -9,6 +9,9 @@ use VStelmakh\TestLogger\Log\Collection;
 
 class Assert
 {
+    /**
+     * @internal
+     */
     public function __construct(
         private readonly Collection $logs,
     ) {}

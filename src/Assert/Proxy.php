@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace VStelmakh\TestLogger\Assert;
 
+/**
+ * @internal
+ */
 class Proxy
 {
     private const PHPUNIT_ASSERT = \PHPUnit\Framework\Assert::class;

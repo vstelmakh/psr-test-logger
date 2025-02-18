@@ -9,6 +9,9 @@ use VStelmakh\TestLogger\Log\Collection;
 
 class Matcher
 {
+    /**
+     * @internal
+     */
     public function __construct(
         private readonly Collection $logs,
         private readonly Criteria $criteria = new Criteria(),

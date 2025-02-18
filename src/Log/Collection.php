@@ -6,6 +6,9 @@ namespace VStelmakh\TestLogger\Log;
 
 use VStelmakh\TestLogger\Assert\Proxy;
 
+/**
+ * @internal
+ */
 class Collection
 {
     /** @var array<Log> */

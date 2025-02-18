@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace VStelmakh\TestLogger\Assert;
 
+/**
+ * @internal
+ */
 class Criteria implements \Stringable
 {
     /** @var array<string> */

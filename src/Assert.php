@@ -12,7 +12,7 @@ class Assert
         private readonly LogCollection $logs,
     ) {}
 
-    public function hasLog(): Matcher
+    public function hasLogs(): Matcher
     {
         $matcher = new Matcher($this->logs);
         $this->assertHasLogs();
@@ -21,49 +21,60 @@ class Assert
 
     public function hasDebug(): Matcher
     {
-        return $this->hasLog()->withLevel(LogLevel::DEBUG);
+        return $this->hasLogs()->withLevel(LogLevel::DEBUG);
     }
 
     public function hasInfo(): Matcher
     {
-        return $this->hasLog()->withLevel(LogLevel::INFO);
+        return $this->hasLogs()->withLevel(LogLevel::INFO);
     }
 
     public function hasNotice(): Matcher
     {
-        return $this->hasLog()->withLevel(LogLevel::NOTICE);
+        return $this->hasLogs()->withLevel(LogLevel::NOTICE);
     }
 
     public function hasWarning(): Matcher
     {
-        return $this->hasLog()->withLevel(LogLevel::WARNING);
+        return $this->hasLogs()->withLevel(LogLevel::WARNING);
     }
 
     public function hasError(): Matcher
     {
-        return $this->hasLog()->withLevel(LogLevel::ERROR);
+        return $this->hasLogs()->withLevel(LogLevel::ERROR);
     }
 
     public function hasCritical(): Matcher
     {
-        return $this->hasLog()->withLevel(LogLevel::CRITICAL);
+        return $this->hasLogs()->withLevel(LogLevel::CRITICAL);
     }
 
     public function hasAlert(): Matcher
     {
-        return $this->hasLog()->withLevel(LogLevel::ALERT);
+        return $this->hasLogs()->withLevel(LogLevel::ALERT);
     }
 
     public function hasEmergency(): Matcher
     {
-        return $this->hasLog()->withLevel(LogLevel::EMERGENCY);
+        return $this->hasLogs()->withLevel(LogLevel::EMERGENCY);
     }
 
     private function assertHasLogs(): void
     {
+        if (!$this->logs->isEmpty()) {
+            if (class_exists(\PHPUnit\Framework\Assert::class, false)) {
+                \PHPUnit\Framework\Assert::assertTrue(true);
+            }
+
+            return;
+        }
+
+        $message = 'Logger has no logs.';
+
         if (class_exists(\PHPUnit\Framework\Assert::class, false)) {
-            $hasLogs = !$this->logs->isEmpty();
-            \PHPUnit\Framework\Assert::assertTrue($hasLogs, 'Logger has no logs.');
+            \PHPUnit\Framework\Assert::fail($message);
+        } else {
+            throw new \RuntimeException($message);
         }
     }
 }

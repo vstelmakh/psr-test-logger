@@ -15,7 +15,7 @@ class Assert
     public function hasLogs(): Matcher
     {
         $matcher = new Matcher($this->logs);
-        $this->assertHasLogs();
+        $this->logs->assertNotEmpty('Logger has no logs.');
         return $matcher;
     }
 
@@ -57,24 +57,5 @@ class Assert
     public function hasEmergency(): Matcher
     {
         return $this->hasLogs()->withLevel(LogLevel::EMERGENCY);
-    }
-
-    private function assertHasLogs(): void
-    {
-        if (!$this->logs->isEmpty()) {
-            if (class_exists(\PHPUnit\Framework\Assert::class, false)) {
-                \PHPUnit\Framework\Assert::assertTrue(true);
-            }
-
-            return;
-        }
-
-        $message = 'Logger has no logs.';
-
-        if (class_exists(\PHPUnit\Framework\Assert::class, false)) {
-            \PHPUnit\Framework\Assert::fail($message);
-        } else {
-            throw new \RuntimeException($message);
-        }
     }
 }

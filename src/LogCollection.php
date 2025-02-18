@@ -46,4 +46,9 @@ class LogCollection
 
         return $collection;
     }
+
+    public function assertNotEmpty(string $message): void
+    {
+        $this->isEmpty() ? AssertProxy::fail($message) : AssertProxy::success();
+    }
 }

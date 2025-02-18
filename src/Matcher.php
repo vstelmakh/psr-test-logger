@@ -23,7 +23,7 @@ class Matcher
     {
         $this->criteria->add(sprintf('level "%s"', $level));
         $matches = $this->logs->filter(fn (Log $log) => $log->level === $level);
-        $this->assertHasLogs($matches);
+        $this->assertHasMatches($matches);
         return new self($matches, $this->criteria);
     }
 
@@ -31,26 +31,12 @@ class Matcher
     {
         $this->criteria->add(sprintf('message "%s"', $message));
         $matches = $this->logs->filter(fn (Log $log) => (string) $log->message === (string) $message);
-        $this->assertHasLogs($matches);
+        $this->assertHasMatches($matches);
         return new self($matches, $this->criteria);
     }
 
-    private function assertHasLogs(LogCollection $logs): void
+    private function assertHasMatches(LogCollection $logs): void
     {
-        if (!$logs->isEmpty()) {
-            if (class_exists(\PHPUnit\Framework\Assert::class, false)) {
-                \PHPUnit\Framework\Assert::assertTrue(true);
-            }
-
-            return;
-        }
-
-        $message = sprintf('No logs matching %s.', $this->criteria);
-
-        if (class_exists(\PHPUnit\Framework\Assert::class, false)) {
-            \PHPUnit\Framework\Assert::fail($message);
-        } else {
-            throw new \RuntimeException($message);
-        }
+        $logs->assertNotEmpty(sprintf('No logs matching %s.', $this->criteria));
     }
 }

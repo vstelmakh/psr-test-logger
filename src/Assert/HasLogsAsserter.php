@@ -6,6 +6,9 @@ namespace VStelmakh\TestLogger\Assert;
 
 use VStelmakh\TestLogger\Log\Collection;
 
+/**
+ * @internal
+ */
 class HasLogsAsserter implements AsserterInterface
 {
     /** @var array<string> */

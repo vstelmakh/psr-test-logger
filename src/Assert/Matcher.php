@@ -20,7 +20,7 @@ class Matcher
     /**
      * @return array<Log>
      */
-    public function getMatches(): array
+    public function getLogs(): array
     {
         return $this->logs->toArray();
     }

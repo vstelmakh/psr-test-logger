@@ -29,6 +29,6 @@ class PHPUnitAssertProxy
 
     private static function hasPhpUnit(): bool
     {
-        return class_exists(self::PHPUNIT_ASSERT, false);
+        return class_exists(self::PHPUNIT_ASSERT, true);
     }
 }

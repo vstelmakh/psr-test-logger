@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace VStelmakh\TestLogger;
 
 use Psr\Log\AbstractLogger;
-use VStelmakh\TestLogger\Assert\Assert;
-use VStelmakh\TestLogger\Log\Filter;
-use VStelmakh\TestLogger\Log\Log;
 use VStelmakh\TestLogger\Log\Collection;
+use VStelmakh\TestLogger\Log\Log;
+use VStelmakh\TestLogger\Match\Assert;
+use VStelmakh\TestLogger\Match\Filter;
 
 class TestLogger extends AbstractLogger
 {

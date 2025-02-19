@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace VStelmakh\TestLogger\Assert;
+namespace VStelmakh\TestLogger\Match;
 
 use Psr\Log\LogLevel;
+use VStelmakh\TestLogger\Assert\HasLogsAsserter;
 use VStelmakh\TestLogger\Log\Collection;
 
 class Assert

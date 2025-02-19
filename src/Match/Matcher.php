@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-namespace VStelmakh\TestLogger\Assert;
+namespace VStelmakh\TestLogger\Match;
 
-use VStelmakh\TestLogger\Log\Log;
+use VStelmakh\TestLogger\Assert\AsserterInterface;
 use VStelmakh\TestLogger\Log\Collection;
+use VStelmakh\TestLogger\Log\Log;
 
 class Matcher
 {

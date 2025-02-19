@@ -23,7 +23,7 @@ class HasLogsAsserter implements AsserterInterface
             $this->criteria[] = $criterion;
         }
 
-        $logs->isEmpty() ? Proxy::fail($this->getMessage()) : Proxy::success();
+        $logs->isEmpty() ? PHPUnitAssertProxy::fail($this->getMessage()) : PHPUnitAssertProxy::success();
     }
 
     private function getMessage(): string

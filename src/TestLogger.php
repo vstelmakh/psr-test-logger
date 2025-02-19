@@ -30,9 +30,9 @@ class TestLogger extends AbstractLogger
         return $this->logs->toArray();
     }
 
-    public function assert(): Assert
+    public function assert(string $message = ''): Assert
     {
-        return new Assert($this->logs);
+        return new Assert($this->logs, $message);
     }
 
     public function filter(): Filter

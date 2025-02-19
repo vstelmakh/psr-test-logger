@@ -6,6 +6,7 @@ namespace VStelmakh\TestLogger\Log;
 
 use Psr\Log\LogLevel;
 use VStelmakh\TestLogger\Assert\Matcher;
+use VStelmakh\TestLogger\Assert\NullAsserter;
 
 class Filter
 {
@@ -18,7 +19,7 @@ class Filter
 
     public function getAll(): Matcher
     {
-        return new Matcher($this->logs, false);
+        return new Matcher($this->logs, new NullAsserter());
     }
 
     public function getDebug(): Matcher

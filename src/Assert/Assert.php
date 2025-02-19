@@ -14,11 +14,12 @@ class Assert
      */
     public function __construct(
         private readonly Collection $logs,
+        private readonly string $message = '',
     ) {}
 
     public function hasLogs(): Matcher
     {
-        return new Matcher($this->logs, true);
+        return new Matcher($this->logs, new HasLogsAsserter($this->message));
     }
 
     public function hasDebug(): Matcher

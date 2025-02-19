@@ -18,9 +18,7 @@ class Assert
 
     public function hasLogs(): Matcher
     {
-        $matcher = new Matcher($this->logs);
-        $this->logs->assertNotEmpty('Logger has no logs.');
-        return $matcher;
+        return new Matcher($this->logs, true);
     }
 
     public function hasDebug(): Matcher

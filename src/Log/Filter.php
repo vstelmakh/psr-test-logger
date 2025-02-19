@@ -18,7 +18,7 @@ class Filter
 
     public function getAll(): Matcher
     {
-        return new Matcher($this->logs);
+        return new Matcher($this->logs, false);
     }
 
     public function getDebug(): Matcher

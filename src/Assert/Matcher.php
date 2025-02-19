@@ -9,13 +9,20 @@ use VStelmakh\TestLogger\Log\Collection;
 
 class Matcher
 {
+    private Collection $logs;
+    private readonly Criteria $criteria;
+    private readonly bool $isAssert;
+
     /**
      * @internal
      */
-    public function __construct(
-        private readonly Collection $logs,
-        private readonly Criteria $criteria = new Criteria(),
-    ) {}
+    public function __construct(Collection $logs, bool $isAssert) {
+        $this->logs = $logs;
+        $this->criteria = new Criteria();
+        $this->isAssert = $isAssert;
+
+        $this->assertNotEmpty();
+    }
 
     /**
      * @return array<Log>
@@ -45,8 +52,16 @@ class Matcher
     private function match(string $criterion, callable $callback): self
     {
         $this->criteria->add($criterion);
-        $matches = $this->logs->filter($callback);
-        $matches->assertNotEmpty(sprintf('No logs matching %s.', $this->criteria));
-        return new self($matches, $this->criteria);
+        $this->logs = $this->logs->filter($callback);
+        $this->assertNotEmpty();
+        return $this;
+    }
+
+    private function assertNotEmpty(): void
+    {
+        if ($this->isAssert) {
+            $message = sprintf('No logs matching %s.', $this->criteria) ?: 'Logger has no logs.';
+            $this->logs->isEmpty() ? Proxy::fail($message) : Proxy::success();
+        }
     }
 }

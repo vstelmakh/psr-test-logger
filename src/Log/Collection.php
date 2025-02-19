@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace VStelmakh\TestLogger\Log;
 
-use VStelmakh\TestLogger\Assert\Proxy;
-
 /**
  * @internal
  */
@@ -50,10 +48,5 @@ class Collection
         }
 
         return $collection;
-    }
-
-    public function assertNotEmpty(string $message): void
-    {
-        $this->isEmpty() ? Proxy::fail($message) : Proxy::success();
     }
 }

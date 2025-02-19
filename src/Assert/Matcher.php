@@ -27,22 +27,26 @@ class Matcher
 
     public function withLevel(mixed $level): self
     {
-        $this->criteria->add(sprintf('level "%s"', $level));
-        $matches = $this->logs->filter(fn (Log $log) => $log->level === $level);
-        $this->assertHasMatches($matches);
-        return new self($matches, $this->criteria);
+        $criterion = sprintf('level "%s"', $level);
+        $callback = fn (Log $log) => $log->level === $level;
+        return $this->match($criterion, $callback);
     }
 
     public function withMessage(\Stringable|string $message): self
     {
-        $this->criteria->add(sprintf('message "%s"', $message));
-        $matches = $this->logs->filter(fn (Log $log) => (string) $log->message === (string) $message);
-        $this->assertHasMatches($matches);
-        return new self($matches, $this->criteria);
+        $criterion = sprintf('message "%s"', $message);
+        $callback = fn (Log $log) => (string) $log->message === (string) $message;
+        return $this->match($criterion, $callback);
     }
 
-    private function assertHasMatches(Collection $logs): void
+    /**
+     * @param callable(Log): bool $callback
+     */
+    private function match(string $criterion, callable $callback): self
     {
-        $logs->assertNotEmpty(sprintf('No logs matching %s.', $this->criteria));
+        $this->criteria->add($criterion);
+        $matches = $this->logs->filter($callback);
+        $matches->assertNotEmpty(sprintf('No logs matching %s.', $this->criteria));
+        return new self($matches, $this->criteria);
     }
 }

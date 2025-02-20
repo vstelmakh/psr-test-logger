@@ -6,6 +6,7 @@
 /tests export-ignore
 /CHANGELOG.md export-ignore
 /CONTRIBUTING.md export-ignore
+/Makefile export-ignore
 
 phpcs.xml export-ignore
 phpstan.neon export-ignore

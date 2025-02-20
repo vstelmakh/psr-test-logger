@@ -34,10 +34,10 @@ class HasLogsAsserter implements AsserterInterface
         $prefix = $this->message !== '' ? $this->message . PHP_EOL : '';
 
         if (empty($this->criteria)) {
-            return sprintf('%sLogger has no logs.', $prefix);
+            return sprintf('%sFailed asserting that has logs.', $prefix);
         }
 
         $criteria = implode(' and ', $this->criteria);
-        return sprintf('%sNo logs matching %s.', $prefix, $criteria);
+        return sprintf('%sFailed asserting that has logs matching %s.', $prefix, $criteria);
     }
 }

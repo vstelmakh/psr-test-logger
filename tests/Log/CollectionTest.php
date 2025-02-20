@@ -42,7 +42,7 @@ class CollectionTest extends TestCase
 
         $expected = [
             new Log(LogLevel::DEBUG, 'Debug message'),
-            new Log(LogLevel::INFO, 'Info message')
+            new Log(LogLevel::INFO, 'Info message'),
         ];
 
         $actual = $collection->toArray();

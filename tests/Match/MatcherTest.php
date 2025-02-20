@@ -54,6 +54,18 @@ class MatcherTest extends TestCase
         self::assertEquals($expected, $actual);
     }
 
+    public function testWithMessageContainsIgnoreCase(): void
+    {
+        $this->logs->add(new Log(LogLevel::ERROR, 'Error message'));
+        $this->logs->add(new Log(LogLevel::INFO, 'Info message'));
+
+        $expected = [new Log(LogLevel::ERROR, 'Error message')];
+        $this->expectAsserterCall($expected, 'message contains ignore case "ERROR"');
+
+        $actual = $this->matcher->withMessageContainsIgnoreCase('ERROR')->getLogs();
+        self::assertEquals($expected, $actual);
+    }
+
     /**
      * @param array<Log> $logs
      */

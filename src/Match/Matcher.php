@@ -49,6 +49,13 @@ class Matcher
         return $this->match($criterion, $callback);
     }
 
+    public function withMessageContainsIgnoreCase(string $message): self
+    {
+        $criterion = sprintf('message contains ignore case "%s"', $message);
+        $callback = fn(Log $log) => mb_stripos((string) $log->message, $message, 0, 'UTF-8') !== false;
+        return $this->match($criterion, $callback);
+    }
+
     /**
      * @param callable(Log): bool $callback
      */

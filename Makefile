@@ -10,15 +10,13 @@ test:
 
 phpcs:
 	echo "\033[7m # \033[0m \033[1mCS Fixer\033[0m"
-	PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer --show-progress=dots --diff --ansi $(filter-out $@,$(MAKECMDGOALS))
+	PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer --ansi $(filter-out $@,$(MAKECMDGOALS))
 
 phpcs-check:
-	echo "\033[7m # \033[0m \033[1mCS Fixer\033[0m"
-	$(MAKE) phpcs check
+	$(MAKE) -- phpcs check --show-progress=dots --diff
 
 phpcs-fix:
-	echo "\033[7m # \033[0m \033[1mCS Fixer\033[0m"
-	$(MAKE) phpcs fix
+	$(MAKE) -- phpcs fix --show-progress=dots --diff
 
 phpstan:
 	echo "\033[7m # \033[0m \033[1mPHPStan\033[0m"

@@ -31,14 +31,14 @@ class Matcher
     public function withLevel(mixed $level): self
     {
         $criterion = sprintf('level "%s"', $level);
-        $callback = fn (Log $log) => $log->level === $level;
+        $callback = fn(Log $log) => $log->level === $level;
         return $this->match($criterion, $callback);
     }
 
     public function withMessage(\Stringable|string $message): self
     {
         $criterion = sprintf('message "%s"', $message);
-        $callback = fn (Log $log) => (string) $log->message === (string) $message;
+        $callback = fn(Log $log) => (string) $log->message === (string) $message;
         return $this->match($criterion, $callback);
     }
 

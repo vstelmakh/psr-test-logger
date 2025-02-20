@@ -4,11 +4,9 @@
 test:
 	$(MAKE) phpcs-check
 	echo "\n"
+	$(MAKE) phpstan
+	echo "\n"
 	$(MAKE) phpunit
-
-phpunit:
-	echo "\033[7m # \033[0m \033[1mPHPUnit\033[0m"
-	vendor/bin/phpunit
 
 phpcs:
 	echo "\033[7m # \033[0m \033[1mCS Fixer\033[0m"
@@ -21,3 +19,11 @@ phpcs-check:
 phpcs-fix:
 	echo "\033[7m # \033[0m \033[1mCS Fixer\033[0m"
 	$(MAKE) phpcs fix
+
+phpstan:
+	echo "\033[7m # \033[0m \033[1mPHPStan\033[0m"
+	vendor/bin/phpstan --ansi --memory-limit=1G
+
+phpunit:
+	echo "\033[7m # \033[0m \033[1mPHPUnit\033[0m"
+	vendor/bin/phpunit

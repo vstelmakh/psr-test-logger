@@ -25,6 +25,9 @@ class TestLogger extends AbstractLogger
         $this->logs->add($log);
     }
 
+    /**
+     * @return array<Log>
+     */
     public function getLogs(): array
     {
         return $this->logs->toArray();

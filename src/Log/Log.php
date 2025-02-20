@@ -9,6 +9,7 @@ class Log
     public function __construct(
         public readonly mixed $level,
         public readonly \Stringable|string $message,
+        /** @var array<mixed> */
         public readonly array $context = [],
     ) {}
 }

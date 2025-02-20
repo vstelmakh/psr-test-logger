@@ -27,6 +27,9 @@ class Collection
         return empty($this->logs);
     }
 
+    /**
+     * @return array<Log>
+     */
     public function toArray(): array
     {
         return $this->logs;

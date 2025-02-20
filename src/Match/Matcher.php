@@ -35,10 +35,17 @@ class Matcher
         return $this->match($criterion, $callback);
     }
 
-    public function withMessage(\Stringable|string $message): self
+    public function withMessage(string $message): self
     {
         $criterion = sprintf('message "%s"', $message);
-        $callback = fn(Log $log) => (string) $log->message === (string) $message;
+        $callback = fn(Log $log) => (string) $log->message === $message;
+        return $this->match($criterion, $callback);
+    }
+
+    public function withMessageContains(string $message): self
+    {
+        $criterion = sprintf('message contains "%s"', $message);
+        $callback = fn(Log $log) => str_contains((string) $log->message, $message);
         return $this->match($criterion, $callback);
     }
 

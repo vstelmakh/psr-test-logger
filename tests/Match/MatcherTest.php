@@ -44,25 +44,37 @@ class MatcherTest extends TestCase
 
     public function testWithMessageContains(): void
     {
-        $this->logs->add(new Log(LogLevel::ERROR, 'Error message'));
-        $this->logs->add(new Log(LogLevel::INFO, 'Info message'));
+        $this->logs->add(new Log(LogLevel::ERROR, 'This is error message'));
+        $this->logs->add(new Log(LogLevel::INFO, 'This is info message'));
 
-        $expected = [new Log(LogLevel::ERROR, 'Error message')];
-        $this->expectAsserterCall($expected, 'message contains "Error"');
+        $expected = [new Log(LogLevel::ERROR, 'This is error message')];
+        $this->expectAsserterCall($expected, 'message contains "error"');
 
-        $actual = $this->matcher->withMessageContains('Error')->getLogs();
+        $actual = $this->matcher->withMessageContains('error')->getLogs();
         self::assertEquals($expected, $actual);
     }
 
     public function testWithMessageContainsIgnoreCase(): void
     {
+        $this->logs->add(new Log(LogLevel::ERROR, 'This is error message'));
+        $this->logs->add(new Log(LogLevel::INFO, 'This is info message'));
+
+        $expected = [new Log(LogLevel::ERROR, 'This is error message')];
+        $this->expectAsserterCall($expected, 'message contains ignore case "ERROR"');
+
+        $actual = $this->matcher->withMessageContainsIgnoreCase('ERROR')->getLogs();
+        self::assertEquals($expected, $actual);
+    }
+
+    public function testWithMessageStartsWith(): void
+    {
         $this->logs->add(new Log(LogLevel::ERROR, 'Error message'));
         $this->logs->add(new Log(LogLevel::INFO, 'Info message'));
 
         $expected = [new Log(LogLevel::ERROR, 'Error message')];
-        $this->expectAsserterCall($expected, 'message contains ignore case "ERROR"');
+        $this->expectAsserterCall($expected, 'message starts with "Error"');
 
-        $actual = $this->matcher->withMessageContainsIgnoreCase('ERROR')->getLogs();
+        $actual = $this->matcher->withMessageStartsWith('Error')->getLogs();
         self::assertEquals($expected, $actual);
     }
 

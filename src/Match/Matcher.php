@@ -42,17 +42,24 @@ class Matcher
         return $this->match($criterion, $callback);
     }
 
-    public function withMessageContains(string $message): self
+    public function withMessageContains(string $needle): self
     {
-        $criterion = sprintf('message contains "%s"', $message);
-        $callback = fn(Log $log) => str_contains((string) $log->message, $message);
+        $criterion = sprintf('message contains "%s"', $needle);
+        $callback = fn(Log $log) => str_contains((string) $log->message, $needle);
         return $this->match($criterion, $callback);
     }
 
-    public function withMessageContainsIgnoreCase(string $message): self
+    public function withMessageContainsIgnoreCase(string $needle): self
     {
-        $criterion = sprintf('message contains ignore case "%s"', $message);
-        $callback = fn(Log $log) => mb_stripos((string) $log->message, $message, 0, 'UTF-8') !== false;
+        $criterion = sprintf('message contains ignore case "%s"', $needle);
+        $callback = fn(Log $log) => mb_stripos((string) $log->message, $needle, 0, 'UTF-8') !== false;
+        return $this->match($criterion, $callback);
+    }
+
+    public function withMessageStartsWith(string $prefix): self
+    {
+        $criterion = sprintf('message starts with "%s"', $prefix);
+        $callback = fn(Log $log) => str_starts_with((string) $log->message, $prefix);
         return $this->match($criterion, $callback);
     }
 

@@ -64,6 +64,21 @@ class Matcher
     }
 
     /**
+     * @param array<mixed> $context
+     */
+    public function withContext(array $context): self
+    {
+        $normalizedContext = [];
+        foreach ($context as $key => $value) {
+            $normalizedContext[] = sprintf('%s: {%s}', $key, gettype($value));
+        }
+
+        $criterion = sprintf('context [%s]', implode(', ', $normalizedContext));
+        $callback = fn(Log $log) => $log->context === $context;
+        return $this->match($criterion, $callback);
+    }
+
+    /**
      * @param callable(Log): bool $callback
      */
     private function match(string $criterion, callable $callback): self

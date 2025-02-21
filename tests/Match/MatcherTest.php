@@ -78,6 +78,18 @@ class MatcherTest extends TestCase
         self::assertEquals($expected, $actual);
     }
 
+    public function testWithContext(): void
+    {
+        $this->logs->add(new Log(LogLevel::ERROR, 'Error message', ['error' => 'data']));
+        $this->logs->add(new Log(LogLevel::INFO, 'Info message', ['info' => 'value']));
+
+        $expected = [new Log(LogLevel::ERROR, 'Error message', ['error' => 'data'])];
+        $this->expectAsserterCall($expected, 'context [error: {string}]');
+
+        $actual = $this->matcher->withContext(['error' => 'data'])->getLogs();
+        self::assertEquals($expected, $actual);
+    }
+
     /**
      * @param array<Log> $logs
      */
@@ -91,7 +103,16 @@ class MatcherTest extends TestCase
         $this->asserter
             ->expects($this->once())
             ->method('assert')
-            ->with($collection, $criterion);
+            ->with(
+                self::callback(function ($value)use ($collection): bool {
+                    self::assertEquals($collection, $value, 'Unexpected collection provided to asserter.');
+                    return true;
+                }),
+                self::callback(function ($value) use ($criterion): bool {
+                    self::assertEquals($criterion, $value, 'Unexpected criterion provided to asserter.');
+                    return true;
+                }),
+            );
     }
 
     protected function setUp(): void

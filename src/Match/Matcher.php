@@ -88,6 +88,15 @@ class Matcher
     /**
      * @param callable(Log): bool $callback
      */
+    public function withCallback(callable $callback): self
+    {
+        $criterion = 'callback';
+        return $this->match($criterion, $callback);
+    }
+
+    /**
+     * @param callable(Log): bool $callback
+     */
     private function match(string $criterion, callable $callback): self
     {
         $this->logs = $this->logs->filter($callback);

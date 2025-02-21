@@ -102,6 +102,19 @@ class MatcherTest extends TestCase
         self::assertEquals($expected, $actual);
     }
 
+    public function testWithCallback(): void
+    {
+        $this->logs->add(new Log(LogLevel::DEBUG, 'Debug message'));
+        $this->logs->add(new Log(LogLevel::INFO, 'Info message'));
+
+        $expected = [new Log(LogLevel::INFO, 'Info message')];
+        $this->expectAsserterCall($expected, 'callback');
+
+        $callback = static fn(Log $log) => $log->level === LogLevel::INFO;
+        $actual = $this->matcher->withCallback($callback)->getLogs();
+        self::assertEquals($expected, $actual);
+    }
+
     /**
      * @param array<Log> $logs
      */

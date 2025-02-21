@@ -78,6 +78,18 @@ class MatcherTest extends TestCase
         self::assertEquals($expected, $actual);
     }
 
+    public function testWithMessageMatches(): void
+    {
+        $this->logs->add(new Log(LogLevel::ERROR, 'Error message'));
+        $this->logs->add(new Log(LogLevel::INFO, 'Info message'));
+
+        $expected = [new Log(LogLevel::ERROR, 'Error message')];
+        $this->expectAsserterCall($expected, 'message matches "/^error/iu"');
+
+        $actual = $this->matcher->withMessageMatches('/^error/iu')->getLogs();
+        self::assertEquals($expected, $actual);
+    }
+
     public function testWithContext(): void
     {
         $this->logs->add(new Log(LogLevel::ERROR, 'Error message', ['error' => 'data']));
@@ -129,7 +141,7 @@ class MatcherTest extends TestCase
             ->expects($this->once())
             ->method('assert')
             ->with(
-                self::callback(function ($value)use ($collection): bool {
+                self::callback(function ($value) use ($collection): bool {
                     self::assertEquals($collection, $value, 'Unexpected collection provided to asserter.');
                     return true;
                 }),

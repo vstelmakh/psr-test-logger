@@ -63,6 +63,13 @@ class Matcher
         return $this->match($criterion, $callback);
     }
 
+    public function withMessageMatches(string $pattern): self
+    {
+        $criterion = sprintf('message matches "%s"', $pattern);
+        $callback = fn(Log $log) => preg_match($pattern, (string) $log->message) === 1;
+        return $this->match($criterion, $callback);
+    }
+
     /**
      * @param array<mixed> $context
      */

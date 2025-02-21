@@ -90,6 +90,18 @@ class MatcherTest extends TestCase
         self::assertEquals($expected, $actual);
     }
 
+    public function testWithContextContains(): void
+    {
+        $this->logs->add(new Log(LogLevel::ERROR, 'Error message', ['error' => 'data']));
+        $this->logs->add(new Log(LogLevel::INFO, 'Info message', ['info' => 'value', 'num' => 1]));
+
+        $expected = [new Log(LogLevel::INFO, 'Info message', ['info' => 'value', 'num' => 1])];
+        $this->expectAsserterCall($expected, 'context contains [num: {integer}]');
+
+        $actual = $this->matcher->withContextContains('num', 1)->getLogs();
+        self::assertEquals($expected, $actual);
+    }
+
     /**
      * @param array<Log> $logs
      */

@@ -78,6 +78,13 @@ class Matcher
         return $this->match($criterion, $callback);
     }
 
+    public function withContextContains(mixed $key, mixed $value): self
+    {
+        $criterion = sprintf('context contains [%s: {%s}]', $key, gettype($value));
+        $callback = fn(Log $log) => isset($log->context[$key]) && $log->context[$key] === $value;
+        return $this->match($criterion, $callback);
+    }
+
     /**
      * @param callable(Log): bool $callback
      */

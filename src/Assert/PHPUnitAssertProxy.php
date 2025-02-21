@@ -11,6 +11,11 @@ class PHPUnitAssertProxy
 {
     private const PHPUNIT_ASSERT = \PHPUnit\Framework\Assert::class;
 
+    /**
+     * Assertation successful.
+     *
+     * @return void
+     */
     public static function success(): void
     {
         if (self::hasPhpUnit()) {
@@ -18,6 +23,12 @@ class PHPUnitAssertProxy
         }
     }
 
+    /**
+     * Assertation failure.
+     *
+     * @param string $message Assertation error message.
+     * @return never
+     */
     public static function fail(string $message): never
     {
         if (self::hasPhpUnit()) {

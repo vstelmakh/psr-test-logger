@@ -26,6 +26,8 @@ class TestLogger extends AbstractLogger
     }
 
     /**
+     * Returns all logs containing in logger.
+     *
      * @return array<Log>
      */
     public function getLogs(): array
@@ -33,11 +35,22 @@ class TestLogger extends AbstractLogger
         return $this->logs->toArray();
     }
 
+    /**
+     * Assert if logger contains logs fulfilling the matching conditions.
+     *
+     * @param string $message Custom assertation error message.
+     * @return Assert
+     */
     public function assert(string $message = ''): Assert
     {
         return new Assert($this->logs, $message);
     }
 
+    /**
+     * Filter logs containing in logger that fulfilling the matching conditions.
+     *
+     * @return Filter
+     */
     public function filter(): Filter
     {
         return new Filter($this->logs);

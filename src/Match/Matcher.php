@@ -21,6 +21,8 @@ class Matcher
     }
 
     /**
+     * Return logs matching conditions.
+     *
      * @return array<Log>
      */
     public function getLogs(): array
@@ -28,6 +30,12 @@ class Matcher
         return $this->logs->toArray();
     }
 
+    /**
+     * Match logs with specified log level.
+     *
+     * @param mixed $level
+     * @return self
+     */
     public function withLevel(mixed $level): self
     {
         $criterion = sprintf('level "%s"', $level);
@@ -35,6 +43,12 @@ class Matcher
         return $this->match($criterion, $callback);
     }
 
+    /**
+     * Match logs with specified message.
+     *
+     * @param string $message
+     * @return self
+     */
     public function withMessage(string $message): self
     {
         $criterion = sprintf('message "%s"', $message);
@@ -42,6 +56,12 @@ class Matcher
         return $this->match($criterion, $callback);
     }
 
+    /**
+     * Match logs with message contains substring.
+     *
+     * @param string $needle
+     * @return self
+     */
     public function withMessageContains(string $needle): self
     {
         $criterion = sprintf('message contains "%s"', $needle);
@@ -49,6 +69,12 @@ class Matcher
         return $this->match($criterion, $callback);
     }
 
+    /**
+     * Match logs with message contains substring (case-insensitive).
+     *
+     * @param string $needle
+     * @return self
+     */
     public function withMessageContainsIgnoreCase(string $needle): self
     {
         $criterion = sprintf('message contains ignore case "%s"', $needle);
@@ -56,6 +82,12 @@ class Matcher
         return $this->match($criterion, $callback);
     }
 
+    /**
+     * Match logs with message starts with prefix.
+     *
+     * @param string $prefix
+     * @return self
+     */
     public function withMessageStartsWith(string $prefix): self
     {
         $criterion = sprintf('message starts with "%s"', $prefix);
@@ -63,6 +95,12 @@ class Matcher
         return $this->match($criterion, $callback);
     }
 
+    /**
+     * Match logs with message matching regular expression.
+     *
+     * @param string $pattern RegEx pattern. Example value: "/^error/i".
+     * @return self
+     */
     public function withMessageMatches(string $pattern): self
     {
         $criterion = sprintf('message matches "%s"', $pattern);
@@ -71,7 +109,10 @@ class Matcher
     }
 
     /**
+     * Match logs with context matching provided one.
+     *
      * @param array<mixed> $context
+     * @return self
      */
     public function withContext(array $context): self
     {
@@ -85,6 +126,13 @@ class Matcher
         return $this->match($criterion, $callback);
     }
 
+    /**
+     * Match logs with context contains key-value pair.
+     *
+     * @param mixed $key
+     * @param mixed $value
+     * @return self
+     */
     public function withContextContains(mixed $key, mixed $value): self
     {
         $criterion = sprintf('context contains [%s: {%s}]', $key, gettype($value));
@@ -93,7 +141,13 @@ class Matcher
     }
 
     /**
-     * @param callable(Log): bool $callback
+     * Match logs by callback. Callback example:
+     * ```
+     * fn(Log $log) => $log->level === LogLevel::INFO;
+     * ```
+     *
+     * @param callable(Log): bool $callback Return "true" on match, otherwise "false".
+     * @return self
      */
     public function withCallback(callable $callback): self
     {

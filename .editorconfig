@@ -12,3 +12,8 @@ ij_continuation_indent_size = 4
 [*.php]
 ij_php_variable_naming_style = camel_case
 ij_php_method_brace_style = next_line
+
+[{*.yml,*.yaml}]
+indent_size = 2
+ij_yaml_keep_indents_on_empty_lines = false
+ij_yaml_keep_line_breaks = true

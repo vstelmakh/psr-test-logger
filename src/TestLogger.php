@@ -19,6 +19,12 @@ class TestLogger extends AbstractLogger
         $this->logs = new Collection();
     }
 
+    /**
+     * @param $level
+     * @param \Stringable|string $message
+     * @param array<mixed> $context
+     * @return void
+     */
     public function log($level, \Stringable|string $message, array $context = []): void
     {
         $log = new Log($level, $message, $context);

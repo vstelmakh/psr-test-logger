@@ -7,6 +7,5 @@ parameters:
 
   reportUnmatchedIgnoredErrors: true
   ignoreErrors:
-    -
-      identifier: missingType.iterableValue
+    - identifier: missingType.iterableValue
       path: tests/*Test.php

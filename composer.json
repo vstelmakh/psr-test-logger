@@ -12,11 +12,11 @@
         }
     ],
     "provide": {
-        "psr/log-implementation": ">=2"
+        "psr/log-implementation": "^2 || ^3"
     },
     "require": {
         "php": "^8.1",
-        "psr/log": ">=2"
+        "psr/log": "^2 || ^3"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.69",

@@ -2,6 +2,8 @@
 
 ---
 
+[![build](https://github.com/vstelmakh/psr-test-logger/actions/workflows/build.yml/badge.svg)](https://github.com/vstelmakh/psr-test-logger/actions/workflows/build.yml)
+
 # PSR Test Logger
 PSR Test Logger is a simple and easy-to-use [PSR-3](https://www.php-fig.org/psr/psr-3/) compliant logger designed specifically for testing.
 It provides seamless integration with [PHPUnit](https://phpunit.de/), making logging assertions effortless.

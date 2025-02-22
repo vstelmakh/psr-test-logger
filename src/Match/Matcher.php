@@ -159,7 +159,7 @@ class Matcher
     }
 
     /**
-     * Match logs by callback. Callback example:
+     * Match logs by callback, for any custom matching. Callback example:
      * ```
      * fn(Log $log) => $log->level === LogLevel::INFO;
      * ```

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace VStelmakh\TestLogger\Log;
+namespace VStelmakh\PsrTestLogger\Log;
 
 /**
  * @internal

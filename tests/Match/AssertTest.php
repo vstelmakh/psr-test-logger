@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace VStelmakh\TestLogger\Tests\Match;
+namespace VStelmakh\PsrTestLogger\Tests\Match;
 
 use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Psr\Log\LogLevel;
-use VStelmakh\TestLogger\Log\Collection;
-use VStelmakh\TestLogger\Log\Log;
-use VStelmakh\TestLogger\Match\Assert;
+use VStelmakh\PsrTestLogger\Log\Collection;
+use VStelmakh\PsrTestLogger\Log\Log;
+use VStelmakh\PsrTestLogger\Match\Assert;
 use PHPUnit\Framework\TestCase;
 
 class AssertTest extends TestCase

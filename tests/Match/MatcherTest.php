@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace VStelmakh\TestLogger\Tests\Match;
+namespace VStelmakh\PsrTestLogger\Tests\Match;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Log\LogLevel;
-use VStelmakh\TestLogger\Assert\AsserterInterface;
-use VStelmakh\TestLogger\Log\Collection;
-use VStelmakh\TestLogger\Log\Log;
-use VStelmakh\TestLogger\Match\Matcher;
+use VStelmakh\PsrTestLogger\Assert\AsserterInterface;
+use VStelmakh\PsrTestLogger\Log\Collection;
+use VStelmakh\PsrTestLogger\Log\Log;
+use VStelmakh\PsrTestLogger\Match\Matcher;
 use PHPUnit\Framework\TestCase;
 
 class MatcherTest extends TestCase

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace VStelmakh\TestLogger\Tests\Log;
+namespace VStelmakh\PsrTestLogger\Tests\Log;
 
 use Psr\Log\LogLevel;
-use VStelmakh\TestLogger\Log\Collection;
+use VStelmakh\PsrTestLogger\Log\Collection;
 use PHPUnit\Framework\TestCase;
-use VStelmakh\TestLogger\Log\Log;
+use VStelmakh\PsrTestLogger\Log\Log;
 
 class CollectionTest extends TestCase
 {

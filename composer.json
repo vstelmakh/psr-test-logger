@@ -22,12 +22,12 @@
     },
     "autoload": {
         "psr-4": {
-            "VStelmakh\\TestLogger\\": "src/"
+            "VStelmakh\\PsrTestLogger\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VStelmakh\\TestLogger\\Tests\\": "tests/"
+            "VStelmakh\\PsrTestLogger\\Tests\\": "tests/"
         }
     },
     "config": {

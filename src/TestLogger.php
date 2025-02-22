@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace VStelmakh\TestLogger;
+namespace VStelmakh\PsrTestLogger;
 
 use Psr\Log\AbstractLogger;
-use VStelmakh\TestLogger\Log\Collection;
-use VStelmakh\TestLogger\Log\Log;
-use VStelmakh\TestLogger\Match\Assert;
-use VStelmakh\TestLogger\Match\Filter;
+use VStelmakh\PsrTestLogger\Log\Collection;
+use VStelmakh\PsrTestLogger\Log\Log;
+use VStelmakh\PsrTestLogger\Match\Assert;
+use VStelmakh\PsrTestLogger\Match\Filter;
 
 class TestLogger extends AbstractLogger
 {

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace VStelmakh\TestLogger\Assert;
+namespace VStelmakh\PsrTestLogger\Assert;
 
-use VStelmakh\TestLogger\Log\Collection;
+use VStelmakh\PsrTestLogger\Log\Collection;
 
 /**
  * @internal

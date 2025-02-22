@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace VStelmakh\TestLogger\Tests\Match;
+namespace VStelmakh\PsrTestLogger\Tests\Match;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use Psr\Log\LogLevel;
-use VStelmakh\TestLogger\Log\Collection;
-use VStelmakh\TestLogger\Log\Log;
-use VStelmakh\TestLogger\Match\Filter;
+use VStelmakh\PsrTestLogger\Log\Collection;
+use VStelmakh\PsrTestLogger\Log\Log;
+use VStelmakh\PsrTestLogger\Match\Filter;
 use PHPUnit\Framework\TestCase;
-use VStelmakh\TestLogger\Match\Matcher;
+use VStelmakh\PsrTestLogger\Match\Matcher;
 
 class FilterTest extends TestCase
 {

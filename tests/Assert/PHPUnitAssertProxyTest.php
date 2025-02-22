@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace VStelmakh\TestLogger\Tests\Assert;
+namespace VStelmakh\PsrTestLogger\Tests\Assert;
 
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\AssertionFailedError;
-use VStelmakh\TestLogger\Assert\PHPUnitAssertProxy;
+use VStelmakh\PsrTestLogger\Assert\PHPUnitAssertProxy;
 use PHPUnit\Framework\TestCase;
 
 class PHPUnitAssertProxyTest extends TestCase

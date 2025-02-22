@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace VStelmakh\TestLogger\Match;
+namespace VStelmakh\PsrTestLogger\Match;
 
 use Psr\Log\LogLevel;
-use VStelmakh\TestLogger\Assert\NullAsserter;
-use VStelmakh\TestLogger\Log\Collection;
+use VStelmakh\PsrTestLogger\Assert\NullAsserter;
+use VStelmakh\PsrTestLogger\Log\Collection;
 
 class Filter
 {

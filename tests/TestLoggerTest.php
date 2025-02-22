@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace VStelmakh\TestLogger\Tests;
+namespace VStelmakh\PsrTestLogger\Tests;
 
 use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Psr\Log\LogLevel;
-use VStelmakh\TestLogger\Log\Log;
-use VStelmakh\TestLogger\TestLogger;
+use VStelmakh\PsrTestLogger\Log\Log;
+use VStelmakh\PsrTestLogger\TestLogger;
 use PHPUnit\Framework\TestCase;
 
 class TestLoggerTest extends TestCase

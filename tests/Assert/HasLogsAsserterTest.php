@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace VStelmakh\TestLogger\Tests\Assert;
+namespace VStelmakh\PsrTestLogger\Tests\Assert;
 
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\AssertionFailedError;
 use Psr\Log\LogLevel;
-use VStelmakh\TestLogger\Assert\HasLogsAsserter;
+use VStelmakh\PsrTestLogger\Assert\HasLogsAsserter;
 use PHPUnit\Framework\TestCase;
-use VStelmakh\TestLogger\Log\Collection;
-use VStelmakh\TestLogger\Log\Log;
+use VStelmakh\PsrTestLogger\Log\Collection;
+use VStelmakh\PsrTestLogger\Log\Log;
 
 class HasLogsAsserterTest extends TestCase
 {

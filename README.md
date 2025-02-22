@@ -9,13 +9,21 @@ Key features:
 - **Automatic PHPUnit Integration** - Works seamlessly within PHPUnit test cases, with zero configuration.
 - **Extensible** - Easily customizable to fit your testing needs.
 
+> [!NOTE]  
+> PHPUnit is not required to use PSR Test Logger. It can be used completely standalone.
+
 ## Installation
 Install the latest version with [Composer](https://getcomposer.org/):
+
 ```bash
 composer require --dev vstelmakh/psr-test-logger
 ```
 
-## Usage
+Remember to require as `dev` dependency. Most likely, you don't need this in production.
+
+## Usage example
+Using PSR Test Logger is as simple as following code example:
+
 ```php
 <?php
 
@@ -27,14 +35,21 @@ class YourServiceTest extends TestCase
     public function testSomething(): void
     {
         $logger = new TestLogger();
-        $instance = new YourService($logger);
-        $instance->execute();
-        
+        $service = new YourService($logger);
+        $service->doSomething();
+
         $logger->assert()->hasInfo()->withMessage('Execution complete.');
         $logger->assert()->hasWarning()->withMessageContains('not found')->withContextContains('id', 1);
+
+        // That's it!
+        // Thanks to automatic PHPUnit integration corresponding assertations will be performed.
     }
 }
 ```
+
+> [!TIP]  
+> For all the available methods check [TestLogger](src/TestLogger.php) and [Matcher](src/Match/Matcher.php), it's well documented and easy to understand.  
+> Or simply use ⚡ autocompletion of your IDE!
 
 ## Credits
 [Volodymyr Stelmakh](https://github.com/vstelmakh)  

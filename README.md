@@ -9,6 +9,12 @@ Key features:
 - **Automatic PHPUnit Integration** - Works seamlessly within PHPUnit test cases, with zero configuration.
 - **Extensible** - Easily customizable to fit your testing needs.
 
+## Requirements
+| Requirement | Version |
+|-------------|---------|
+| PHP         | >= 8.1  |
+| psr/log     | >= 2.0  |
+
 > [!NOTE]  
 > PHPUnit is not required to use PSR Test Logger. It can be used completely standalone.
 

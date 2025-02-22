@@ -56,20 +56,33 @@ class TestLoggerTest extends TestCase
         ];
     }
 
-    public function testAssert(): void
+    public function testAssertSuccess(): void
     {
-        $loggerWithLogs = new TestLogger();
-        $loggerWithLogs->info('This is test message.');
-        $loggerWithLogs->assert()->hasLogs();
-
-        $message = 'Custom assertation error message.';
-        $loggerWithoutLogs = new TestLogger();
-        $this->expectException(AssertionFailedError::class);
-        $this->expectExceptionMessage($message);
-        $loggerWithoutLogs->assert($message)->hasLogs();
+        $logger = new TestLogger();
+        $logger->info('This is test message.');
+        $logger->assert()->hasLogs();
     }
 
-    public function testFilter(): void
+    public function testAssertFail(): void
+    {
+        $logger = new TestLogger();
+        $logger->info('This is test message.');
+
+        $this->expectException(AssertionFailedError::class);
+        $this->expectExceptionMessage(
+            'Custom assertation error message.'
+            . PHP_EOL
+            . 'Failed asserting that has logs matching level "info" and message "This is test message." and callback.',
+        );
+
+        $logger
+            ->assert('Custom assertation error message.')
+            ->hasInfo()
+            ->withMessage('This is test message.')
+            ->withCallback(fn($log) => false);
+    }
+
+    public function testFilterSuccess(): void
     {
         $logger = new TestLogger();
         $logger->info('This is test message.');
@@ -77,8 +90,14 @@ class TestLoggerTest extends TestCase
         $actual = $logger->filter()->getInfo()->getLogs();
         $expected = [new Log(LogLevel::INFO, 'This is test message.')];
         self::assertEquals($expected, $actual);
+    }
 
-        $actual = $logger->filter()->getError()->getLogs();
+    public function testFilterFail(): void
+    {
+        $logger = new TestLogger();
+        $logger->info('This is test message.');
+
+        $actual = $logger->filter()->getAll()->withLevel(LogLevel::ERROR)->getLogs();
         $expected = [];
         self::assertEquals($expected, $actual);
     }

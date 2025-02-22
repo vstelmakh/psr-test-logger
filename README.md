@@ -1,6 +1,7 @@
 # PSR Test Logger
 PSR Test Logger is a simple and easy-to-use [PSR-3](https://www.php-fig.org/psr/psr-3/) compliant logger designed specifically for testing.
 It provides seamless integration with [PHPUnit](https://phpunit.de/), making logging assertions effortless.
+With PSR Test Logger, you can efficiently verify log messages and context, ensuring your application logs expected events without unnecessary complexity.
 
 Key features:
 - **Fluent Interface** - Enables cleaner test assertions and better IDE autocompletion.

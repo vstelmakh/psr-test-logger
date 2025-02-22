@@ -50,7 +50,7 @@ jobs:
         run: composer update ${{ matrix.composer }} --prefer-dist --no-progress --no-suggest --no-interaction
 
       - name: Run PHP CS Fixer
-        run: make phpcs-check
+        run: make phpcs
         if: success()
 
       - name: Run PHPStan

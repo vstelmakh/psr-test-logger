@@ -20,13 +20,7 @@ class MatcherTest extends TestCase
 
     public function testConstruct(): void
     {
-        $this->logs->add(new Log(LogLevel::DEBUG, 'Debug message'));
-        $this->logs->add(new Log(LogLevel::INFO, 'Info message'));
-
-        $expected = [
-            new Log(LogLevel::DEBUG, 'Debug message'),
-            new Log(LogLevel::INFO, 'Info message'),
-        ];
+        $expected = $this->logs->toArray();
         $this->expectAsserterCall($expected, null);
 
         $matcher = new Matcher($this->logs, $this->asserter);
@@ -36,117 +30,125 @@ class MatcherTest extends TestCase
 
     public function testWithLevel(): void
     {
-        $this->logs->add(new Log(LogLevel::DEBUG, 'Debug message'));
-        $this->logs->add(new Log(LogLevel::INFO, 'Info message'));
-
-        $expected = [new Log(LogLevel::INFO, 'Info message')];
+        $expected = [$this->getSampleLog(LogLevel::INFO)];
         $this->expectAsserterCall($expected, 'level "info"');
-
-        $actual = $this->matcher->withLevel(LogLevel::INFO)->getLogs();
-        self::assertEquals($expected, $actual);
+        $matcher = $this->matcher->withLevel(LogLevel::INFO);
+        $this->assertMatcherResult($matcher, $expected);
     }
 
     public function testWithMessage(): void
     {
-        $this->logs->add(new Log(LogLevel::ERROR, 'Error message'));
-        $this->logs->add(new Log(LogLevel::INFO, 'Info message'));
-
-        $expected = [new Log(LogLevel::ERROR, 'Error message')];
-        $this->expectAsserterCall($expected, 'message "Error message"');
-
-        $actual = $this->matcher->withMessage('Error message')->getLogs();
-        self::assertEquals($expected, $actual);
+        $expected = [$this->getSampleLog(LogLevel::ERROR)];
+        $this->expectAsserterCall($expected, 'message "error: This is sample "error" message."');
+        $matcher = $this->matcher->withMessage('error: This is sample "error" message.');
+        $this->assertMatcherResult($matcher, $expected);
     }
 
     public function testWithMessageContains(): void
     {
-        $this->logs->add(new Log(LogLevel::ERROR, 'This is error message'));
-        $this->logs->add(new Log(LogLevel::INFO, 'This is info message'));
-
-        $expected = [new Log(LogLevel::ERROR, 'This is error message')];
-        $this->expectAsserterCall($expected, 'message contains "error"');
-
-        $actual = $this->matcher->withMessageContains('error')->getLogs();
-        self::assertEquals($expected, $actual);
+        $expected = [$this->getSampleLog(LogLevel::WARNING)];
+        $this->expectAsserterCall($expected, 'message contains "warning"');
+        $matcher = $this->matcher->withMessageContains('warning');
+        $this->assertMatcherResult($matcher, $expected);
     }
 
     public function testWithMessageContainsIgnoreCase(): void
     {
-        $this->logs->add(new Log(LogLevel::ERROR, 'This is error message'));
-        $this->logs->add(new Log(LogLevel::INFO, 'This is info message'));
-
-        $expected = [new Log(LogLevel::ERROR, 'This is error message')];
-        $this->expectAsserterCall($expected, 'message contains ignore case "ERROR"');
-
-        $actual = $this->matcher->withMessageContainsIgnoreCase('ERROR')->getLogs();
-        self::assertEquals($expected, $actual);
+        $expected = [$this->getSampleLog(LogLevel::CRITICAL)];
+        $this->expectAsserterCall($expected, 'message contains ignore case "CriTiCAL"');
+        $matcher = $this->matcher->withMessageContainsIgnoreCase('CriTiCAL');
+        $this->assertMatcherResult($matcher, $expected);
     }
 
     public function testWithMessageStartsWith(): void
     {
-        $this->logs->add(new Log(LogLevel::ERROR, 'Error message'));
-        $this->logs->add(new Log(LogLevel::INFO, 'Info message'));
-
-        $expected = [new Log(LogLevel::ERROR, 'Error message')];
-        $this->expectAsserterCall($expected, 'message starts with "Error"');
-
-        $actual = $this->matcher->withMessageStartsWith('Error')->getLogs();
-        self::assertEquals($expected, $actual);
+        $expected = [$this->getSampleLog(LogLevel::ERROR)];
+        $this->expectAsserterCall($expected, 'message starts with "error"');
+        $matcher = $this->matcher->withMessageStartsWith('error');
+        $this->assertMatcherResult($matcher, $expected);
     }
 
     public function testWithMessageMatches(): void
     {
-        $this->logs->add(new Log(LogLevel::ERROR, 'Error message'));
-        $this->logs->add(new Log(LogLevel::INFO, 'Info message'));
-
-        $expected = [new Log(LogLevel::ERROR, 'Error message')];
-        $this->expectAsserterCall($expected, 'message matches "/^error/iu"');
-
-        $actual = $this->matcher->withMessageMatches('/^error/iu')->getLogs();
-        self::assertEquals($expected, $actual);
+        $expected = [$this->getSampleLog(LogLevel::ERROR)];
+        $this->expectAsserterCall($expected, 'message matches "/^error:/iu"');
+        $matcher = $this->matcher->withMessageMatches('/^error:/iu');
+        $this->assertMatcherResult($matcher, $expected);
     }
 
     public function testWithContext(): void
     {
-        $this->logs->add(new Log(LogLevel::ERROR, 'Error message', ['error' => 'data']));
-        $this->logs->add(new Log(LogLevel::INFO, 'Info message', ['info' => 'value']));
-
-        $expected = [new Log(LogLevel::ERROR, 'Error message', ['error' => 'data'])];
-        $this->expectAsserterCall($expected, 'context [error: {string}]');
-
-        $actual = $this->matcher->withContext(['error' => 'data'])->getLogs();
-        self::assertEquals($expected, $actual);
+        $sampleLog = $this->getSampleLog(LogLevel::ERROR);
+        $expected = [$sampleLog];
+        $this->expectAsserterCall($expected, 'context [error: {string}, string: {string}, int: {integer}]');
+        $matcher = $this->matcher->withContext($sampleLog->context);
+        $this->assertMatcherResult($matcher, $expected);
     }
 
     public function testWithContextContains(): void
     {
-        $this->logs->add(new Log(LogLevel::ERROR, 'Error message', ['error' => 'data']));
-        $this->logs->add(new Log(LogLevel::INFO, 'Info message', ['info' => 'value', 'num' => 1]));
-
-        $expected = [new Log(LogLevel::INFO, 'Info message', ['info' => 'value', 'num' => 1])];
-        $this->expectAsserterCall($expected, 'context contains [num: {integer}]');
-
-        $actual = $this->matcher->withContextContains('num', 1)->getLogs();
-        self::assertEquals($expected, $actual);
+        $expected = [$this->getSampleLog(LogLevel::ERROR)];
+        $this->expectAsserterCall($expected, 'context contains [error: {string}]');
+        $matcher = $this->matcher->withContextContains('error', 'level data');
+        $this->assertMatcherResult($matcher, $expected);
     }
 
     public function testWithCallback(): void
     {
-        $this->logs->add(new Log(LogLevel::DEBUG, 'Debug message'));
-        $this->logs->add(new Log(LogLevel::INFO, 'Info message'));
-
-        $expected = [new Log(LogLevel::INFO, 'Info message')];
+        $expected = [$this->getSampleLog(LogLevel::INFO)];
         $this->expectAsserterCall($expected, 'callback');
-
         $callback = static fn(Log $log) => $log->level === LogLevel::INFO;
-        $actual = $this->matcher->withCallback($callback)->getLogs();
-        self::assertEquals($expected, $actual);
+        $matcher = $this->matcher->withCallback($callback);
+        $this->assertMatcherResult($matcher, $expected);
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->logs = $this->getInitialLogs();
+        $this->asserter = $this->createMock(AsserterInterface::class);
+        $this->matcher = new Matcher($this->logs, $this->asserter);
+    }
+
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+        unset(
+            $this->asserter,
+            $this->matcher,
+        );
+    }
+
+    private function getInitialLogs(): Collection
+    {
+        $logs = new Collection();
+        $logs->add($this->getSampleLog(LogLevel::DEBUG));
+        $logs->add($this->getSampleLog(LogLevel::INFO));
+        $logs->add($this->getSampleLog(LogLevel::WARNING));
+        $logs->add($this->getSampleLog(LogLevel::ERROR));
+        $logs->add($this->getSampleLog(LogLevel::CRITICAL));
+        $logs->add(new Log(LogLevel::ERROR, 'Other error message.'));
+        return $logs;
+    }
+
+    private function getSampleLog(mixed $level): Log
+    {
+        return new Log(
+            $level,
+            sprintf('%s: This is sample "%s" message.', $level, $level),
+            [
+                $level => 'level data',
+                'string' => 'string data',
+                'int' => 123,
+            ],
+        );
     }
 
     /**
      * @param array<Log> $logs
      */
-    protected function expectAsserterCall(array $logs, ?string $criterion): void
+    private function expectAsserterCall(array $logs, ?string $criterion): void
     {
         $collection = new Collection();
         foreach ($logs as $log) {
@@ -176,21 +178,13 @@ class MatcherTest extends TestCase
             );
     }
 
-    protected function setUp(): void
+    private function assertMatcherResult(Matcher $matcher, array $expected): void
     {
-        parent::setUp();
+        $initialLogs = $this->getInitialLogs()->toArray();
+        $matcherLogs = $this->matcher->getLogs();
+        self::assertEquals($initialLogs, $matcherLogs, 'Initial matcher logs modified.');
 
-        $this->logs = new Collection();
-        $this->asserter = $this->createMock(AsserterInterface::class);
-        $this->matcher = new Matcher($this->logs, $this->asserter);
-    }
-
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-        unset(
-            $this->asserter,
-            $this->matcher,
-        );
+        $actual = $matcher->getLogs();
+        self::assertEquals($expected, $actual, 'Unexpected matcher logs result.');
     }
 }

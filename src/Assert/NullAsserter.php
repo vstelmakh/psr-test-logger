@@ -11,7 +11,12 @@ use VStelmakh\PsrTestLogger\Log\Collection;
  */
 class NullAsserter implements AsserterInterface
 {
-    public function assert(Collection $logs, ?string $criterion): void
+    public function assert(Collection $logs): void
+    {
+        // do nothing
+    }
+
+    public function addCriterion(string $criterion): void
     {
         // do nothing
     }

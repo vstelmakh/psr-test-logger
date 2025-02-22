@@ -20,13 +20,14 @@ class HasLogsAsserter implements AsserterInterface
         $this->message = $message;
     }
 
-    public function assert(Collection $logs, ?string $criterion): void
+    public function assert(Collection $logs): void
     {
-        if ($criterion !== null) {
-            $this->criteria[] = $criterion;
-        }
-
         $logs->isEmpty() ? PHPUnitAssertProxy::fail($this->getMessage()) : PHPUnitAssertProxy::success();
+    }
+
+    public function addCriterion(string $criterion): void
+    {
+        $this->criteria[] = $criterion;
     }
 
     private function getMessage(): string

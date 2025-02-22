@@ -20,7 +20,7 @@ class HasLogsAsserterTest extends TestCase
         $logs->add(new Log(LogLevel::INFO, 'Test message.'));
 
         $asserter = new HasLogsAsserter();
-        $asserter->assert($logs, null);
+        $asserter->assert($logs);
         $assertCount = Assert::getCount();
         self::assertSame(1, $assertCount);
     }
@@ -31,7 +31,7 @@ class HasLogsAsserterTest extends TestCase
         $asserter = new HasLogsAsserter();
         $this->expectException(AssertionFailedError::class);
         $this->expectExceptionMessage('Failed asserting that has logs.');
-        $asserter->assert($logs, null);
+        $asserter->assert($logs);
     }
 
     public function testAssertEmptyNoCriteriaWithMessage(): void
@@ -40,25 +40,27 @@ class HasLogsAsserterTest extends TestCase
         $asserter = new HasLogsAsserter('Custom failure message.');
         $this->expectException(AssertionFailedError::class);
         $this->expectExceptionMessage('Custom failure message.' . "\n" . 'Failed asserting that has logs.');
-        $asserter->assert($logs, null);
+        $asserter->assert($logs);
     }
 
     public function testAssertEmptyWithCriteriaNoMessage(): void
     {
         $logs = new Collection();
         $asserter = new HasLogsAsserter();
+        $asserter->addCriterion('CRITERION_1');
         $this->expectException(AssertionFailedError::class);
         $this->expectExceptionMessage('Failed asserting that has logs matching CRITERION_1.');
-        $asserter->assert($logs, 'CRITERION_1');
+        $asserter->assert($logs);
     }
 
     public function testAssertEmptyWithCriteriaWithMessage(): void
     {
         $logs = new Collection();
         $asserter = new HasLogsAsserter('Custom failure message.');
+        $asserter->addCriterion('CRITERION_1');
         $this->expectException(AssertionFailedError::class);
         $this->expectExceptionMessage('Custom failure message.' . "\n" . 'Failed asserting that has logs matching CRITERION_1.');
-        $asserter->assert($logs, 'CRITERION_1');
+        $asserter->assert($logs);
     }
 
     public function testAssertEmptyChainedCriteriaWithMessage(): void
@@ -67,11 +69,13 @@ class HasLogsAsserterTest extends TestCase
 
         $logs1 = new Collection();
         $logs1->add(new Log(LogLevel::INFO, 'Test message.'));
-        $asserter->assert($logs1, 'CRITERION_1');
+        $asserter->addCriterion('CRITERION_1');
+        $asserter->assert($logs1);
 
         $logs2 = new Collection();
+        $asserter->addCriterion('CRITERION_2');
         $this->expectException(AssertionFailedError::class);
         $this->expectExceptionMessage('Custom failure message.' . "\n" . 'Failed asserting that has logs matching CRITERION_1 and CRITERION_2.');
-        $asserter->assert($logs2, 'CRITERION_2');
+        $asserter->assert($logs2);
     }
 }

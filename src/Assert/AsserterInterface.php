@@ -15,8 +15,15 @@ interface AsserterInterface
      * Assert provided collection in compliance with asserter requirements.
      *
      * @param Collection $logs
-     * @param string|null $criterion
      * @return void
      */
-    public function assert(Collection $logs, ?string $criterion): void;
+    public function assert(Collection $logs): void;
+
+    /**
+     * Add matching criterion to the matcher.
+     *
+     * @param string $criterion
+     * @return void
+     */
+    public function addCriterion(string $criterion): void;
 }

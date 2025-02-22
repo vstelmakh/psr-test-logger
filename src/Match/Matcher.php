@@ -17,7 +17,7 @@ class Matcher
         private Collection $logs,
         private readonly AsserterInterface $asserter,
     ) {
-        $this->asserter->assert($this->logs, null);
+        $this->asserter->assert($this->logs);
     }
 
     /**
@@ -160,8 +160,9 @@ class Matcher
      */
     private function match(string $criterion, callable $callback): self
     {
-        $this->logs = $this->logs->filter($callback);
-        $this->asserter->assert($this->logs, $criterion);
-        return $this;
+        $logs = $this->logs->filter($callback);
+        $asserter = clone $this->asserter;
+        $asserter->addCriterion($criterion);
+        return new self($logs, $asserter);
     }
 }

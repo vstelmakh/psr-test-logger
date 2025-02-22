@@ -18,6 +18,22 @@ class MatcherTest extends TestCase
     private MockObject&AsserterInterface $asserter;
     private Matcher $matcher;
 
+    public function testConstruct(): void
+    {
+        $this->logs->add(new Log(LogLevel::DEBUG, 'Debug message'));
+        $this->logs->add(new Log(LogLevel::INFO, 'Info message'));
+
+        $expected = [
+            new Log(LogLevel::DEBUG, 'Debug message'),
+            new Log(LogLevel::INFO, 'Info message'),
+        ];
+        $this->expectAsserterCall($expected, null);
+
+        $matcher = new Matcher($this->logs, $this->asserter);
+        $actual = $matcher->getLogs();
+        self::assertEquals($expected, $actual);
+    }
+
     public function testWithLevel(): void
     {
         $this->logs->add(new Log(LogLevel::DEBUG, 'Debug message'));
@@ -130,11 +146,23 @@ class MatcherTest extends TestCase
     /**
      * @param array<Log> $logs
      */
-    protected function expectAsserterCall(array $logs, string $criterion): void
+    protected function expectAsserterCall(array $logs, ?string $criterion): void
     {
         $collection = new Collection();
         foreach ($logs as $log) {
             $collection->add($log);
+        }
+
+        if ($criterion !== null) {
+            $this->asserter
+                ->expects($this->once())
+                ->method('addCriterion')
+                ->with(
+                    self::callback(function ($value) use ($criterion): bool {
+                        self::assertEquals($criterion, $value, 'Unexpected criterion provided to asserter.');
+                        return true;
+                    }),
+                );
         }
 
         $this->asserter
@@ -143,10 +171,6 @@ class MatcherTest extends TestCase
             ->with(
                 self::callback(function ($value) use ($collection): bool {
                     self::assertEquals($collection, $value, 'Unexpected collection provided to asserter.');
-                    return true;
-                }),
-                self::callback(function ($value) use ($criterion): bool {
-                    self::assertEquals($criterion, $value, 'Unexpected criterion provided to asserter.');
                     return true;
                 }),
             );

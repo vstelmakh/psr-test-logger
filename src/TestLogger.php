@@ -49,7 +49,7 @@ class TestLogger extends AbstractLogger
      */
     public function assert(string $message = ''): Assert
     {
-        return new Assert($this->logs, $message);
+        return new Assert(clone $this->logs, $message);
     }
 
     /**
@@ -59,6 +59,6 @@ class TestLogger extends AbstractLogger
      */
     public function filter(): Filter
     {
-        return new Filter($this->logs);
+        return new Filter(clone $this->logs);
     }
 }

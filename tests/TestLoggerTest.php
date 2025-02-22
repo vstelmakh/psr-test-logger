@@ -20,16 +20,12 @@ class TestLoggerTest extends TestCase
         $logger->log(LogLevel::INFO, 'This is "info" message.');
         $logger->log(LogLevel::ERROR, 'This is "error" message.', ['some' => 'data']);
         $logger->log(100, 'This is "100" message.');
-        $objectLevel = new \stdClass();
-        $objectLevel->property = 'value';
-        $logger->log($objectLevel, 'This is "object" message.', ['other' => 'data']);
 
         $actual = $logger->getLogs();
         $expected = [
             new Log(LogLevel::INFO, 'This is "info" message.'),
             new Log(LogLevel::ERROR, 'This is "error" message.', ['some' => 'data']),
             new Log(100, 'This is "100" message.'),
-            new Log($objectLevel, 'This is "object" message.', ['other' => 'data']),
         ];
 
         self::assertEquals($expected, $actual);

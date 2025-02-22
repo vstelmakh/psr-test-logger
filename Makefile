@@ -9,11 +9,11 @@ test:
 	$(MAKE) phpunit
 
 phpcs:
-	echo "\033[7m # \033[0m \033[1mCS Fixer\033[0m"
+	echo "\033[7m # \033[0m \033[1mPHP CS Fixer\033[0m"
 	PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer --config=phpcs.php --ansi --show-progress=dots --diff check
 
 phpcs-fix:
-	echo "\033[7m # \033[0m \033[1mCS Fixer (fix)\033[0m"
+	echo "\033[7m # \033[0m \033[1mPHP CS Fixer (fix)\033[0m"
 	PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer --config=phpcs.php --ansi --show-progress=dots --diff fix
 
 phpstan:

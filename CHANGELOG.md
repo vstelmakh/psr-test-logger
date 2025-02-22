@@ -11,6 +11,7 @@ Releases are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html
   - `withMessageContainsIgnoreCase`
   - `withMessageStartsWith`
   - `withMessageMatches`
-  - `withContext`
+  - `withContextEqualTo`
+  - `withContextSameAs`
   - `withContextContains`
   - `withCallback`

@@ -109,19 +109,37 @@ class Matcher
     }
 
     /**
-     * Match logs with context matching provided one.
+     * Match logs with context matching provided one, using loose comparison (==).
      *
      * @param array<mixed> $context
      * @return self
      */
-    public function withContext(array $context): self
+    public function withContextEqualTo(array $context): self
     {
         $normalizedContext = [];
         foreach ($context as $key => $value) {
             $normalizedContext[] = sprintf('%s: {%s}', $key, gettype($value));
         }
 
-        $criterion = sprintf('context [%s]', implode(', ', $normalizedContext));
+        $criterion = sprintf('context equal to [%s]', implode(', ', $normalizedContext));
+        $callback = fn(Log $log) => $log->context == $context;
+        return $this->match($criterion, $callback);
+    }
+
+    /**
+     * Match logs with context matching provided one, using strict comparison (===).
+     *
+     * @param array<mixed> $context
+     * @return self
+     */
+    public function withContextSameAs(array $context): self
+    {
+        $normalizedContext = [];
+        foreach ($context as $key => $value) {
+            $normalizedContext[] = sprintf('%s: {%s}', $key, gettype($value));
+        }
+
+        $criterion = sprintf('context same as [%s]', implode(', ', $normalizedContext));
         $callback = fn(Log $log) => $log->context === $context;
         return $this->match($criterion, $callback);
     }

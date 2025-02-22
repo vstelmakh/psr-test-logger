@@ -12,6 +12,6 @@ return (new PhpCsFixer\Config())
         '@PER-CS' => true,
     ])
     ->setFinder($finder)
-    ->setCacheFile(__DIR__. '/var/php-cs-fixer')
+    ->setCacheFile(__DIR__ . '/var/phpcs')
     ->setParallelConfig(PhpCsFixer\Runner\Parallel\ParallelConfigFactory::detect())
 ;

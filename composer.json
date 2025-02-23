@@ -1,7 +1,7 @@
 {
     "name": "vstelmakh/psr-test-logger",
     "description": "Easy to use PSR-3 compliant test-logger",
-    "keywords": ["php", "log", "logger", "psr-3", "logging", "test"],
+    "keywords": ["log", "logger", "psr-3", "logging", "test"],
     "type": "library",
     "license": "MIT",
     "homepage": "https://github.com/vstelmakh/psr-test-logger",

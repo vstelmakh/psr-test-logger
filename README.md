@@ -10,7 +10,7 @@ It provides seamless integration with [PHPUnit](https://phpunit.de/), making log
 With PSR Test Logger, you can efficiently verify log messages and context, ensuring your application logs expected events without unnecessary complexity.
 
 Key features:
-- **Fluent Interface** - Enables cleaner test assertions with intuitive IDE autocompletion.
+- **Fluent Interface** - Provides clean test assertions with intuitive IDE autocompletion.
 - **Predefined Assertions** - A rich set of built-in assertions to validate log messages and contexts.
 - **Automatic PHPUnit Integration** - Works seamlessly within PHPUnit test cases, with zero configuration.
 - **Extensible** - Easily customizable to fit your testing needs.
@@ -34,8 +34,6 @@ composer require --dev vstelmakh/psr-test-logger
 Remember to require as `dev` dependency. Most likely, you don't need this in production.
 
 ## Usage Example
-Using PSR Test Logger is as simple as following code example:
-
 ```php
 <?php
 
@@ -47,6 +45,7 @@ class YourServiceTest extends TestCase
     public function testSomething(): void
     {
         $logger = new TestLogger();
+
         $service = new YourService($logger);
         $service->doSomething();
 
@@ -66,7 +65,7 @@ class YourServiceTest extends TestCase
 ```
 
 > [!TIP]  
-> For all the available methods check [TestLogger](src/TestLogger.php) and [Matcher](src/Match/Matcher.php), it's well documented and easy to understand.  
+> For all the available methods check [TestLogger](src/TestLogger.php) and [Matcher](src/Match/Matcher.php), it's well documented and easy to follow.  
 > Or simply use ⚡ autocompletion of your IDE!
 
 ## Contributing and Support

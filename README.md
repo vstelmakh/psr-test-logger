@@ -50,11 +50,17 @@ class YourServiceTest extends TestCase
         $service = new YourService($logger);
         $service->doSomething();
 
-        $logger->assert()->hasInfo()->withMessage('Execution complete.');
-        $logger->assert()->hasWarning()->withMessageContains('not found')->withContextContains('id', 1);
+        // Thanks to automatic PHPUnit integration,
+        // corresponding assertations can be performed as simple as:
 
-        // That's it!
-        // Thanks to automatic PHPUnit integration corresponding assertations will be performed.
+        $logger->assert()
+            ->hasLogs()
+            ->withMessage('Execution complete.');
+
+        $logger->assert()
+            ->hasWarning()
+            ->withMessageContains('not found')
+            ->withContextContains('id', 1);
     }
 }
 ```

@@ -33,7 +33,7 @@ composer require --dev vstelmakh/psr-test-logger
 
 Remember to require as `dev` dependency. Most likely, you don't need this in production.
 
-## Usage example
+## Usage Example
 Using PSR Test Logger is as simple as following code example:
 
 ```php
@@ -68,6 +68,10 @@ class YourServiceTest extends TestCase
 > [!TIP]  
 > For all the available methods check [TestLogger](src/TestLogger.php) and [Matcher](src/Match/Matcher.php), it's well documented and easy to understand.  
 > Or simply use ⚡ autocompletion of your IDE!
+
+## Contributing and Support
+If you find this useful, don't hesitate to ⭐ give it a star!  
+Contributions are welcome. Please check out the [CONTRIBUTING](CONTRIBUTING.md) for guidelines.
 
 ## Credits
 [Volodymyr Stelmakh](https://github.com/vstelmakh)  

@@ -1,8 +1,12 @@
 # Contributing
 
-Thank you for the interest in **PSR Test Logger** library. If you find a problem or want to discuss new features you are welcome to open an issue and/or a pull request.
+Thank you for the interest in **PSR Test Logger** library. If you find a problem or want to discuss new features
+you are welcome to open an [issue](https://github.com/vstelmakh/psr-test-logger/issues/new)
+and/or a [pull request](https://github.com/vstelmakh/psr-test-logger/compare).
 
-When creating your pull request, please write a description which explains the changes.
+When submitting your pull request, consider writing a description which explains the changes.
+Please note that not all pull requests may be merged. Merging a PR is at the discretion of the maintainer
+and depends on factors such as: relevance to the project's goals, impact on maintainability and code quality.
 
 By contributing to this project, you agree that your contributions will be licensed under [project's MIT License](./LICENSE).
 
@@ -22,7 +26,7 @@ Here are a few rules to follow when making changes to this project:
 - Be consistent with existing code in the project.
 - Code should properly run on supported PHP versions (see [composer.json](./composer.json) require section).
 
-## Tests and tools
+## Tests and Tools
 To run all the tests and checks use `make` with target `test`:
 ```bash
 make test

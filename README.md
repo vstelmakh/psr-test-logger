@@ -3,6 +3,7 @@
 ---
 
 [![build](https://github.com/vstelmakh/psr-test-logger/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/vstelmakh/psr-test-logger/actions/workflows/build.yml)
+[![Packagist version](https://img.shields.io/packagist/v/vstelmakh/psr-test-logger?color=orange)](https://packagist.org/packages/vstelmakh/psr-test-logger)
 
 # PSR Test Logger
 PSR Test Logger is a simple and easy-to-use [PSR-3](https://www.php-fig.org/psr/psr-3/) compliant logger designed specifically for testing.

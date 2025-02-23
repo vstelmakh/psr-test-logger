@@ -60,7 +60,7 @@ class TestLoggerTest extends TestCase
     {
         $logger = new TestLogger();
         $logger->info('This is test message.');
-        $logger->assert()->hasLogs();
+        $logger->assert()->hasLog();
     }
 
     public function testAssertFail(): void

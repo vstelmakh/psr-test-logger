@@ -36,8 +36,8 @@ class AssertTest extends TestCase
     public static function hasProvider(): array
     {
         return [
-            ['hasLogs', null, false],
-            ['hasLogs', LogLevel::INFO, true],
+            ['hasLog', null, false],
+            ['hasLog', LogLevel::INFO, true],
             ['hasDebug', LogLevel::INFO, false],
             ['hasDebug', LogLevel::DEBUG, true],
             ['hasInfo', LogLevel::DEBUG, false],

@@ -54,7 +54,7 @@ class YourServiceTest extends TestCase
         // corresponding assertations can be performed as simple as:
 
         $logger->assert()
-            ->hasLogs()
+            ->hasLog()
             ->withMessage('Execution complete.');
 
         $logger->assert()

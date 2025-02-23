@@ -23,7 +23,7 @@ class Assert
      *
      * @return Matcher
      */
-    public function hasLogs(): Matcher
+    public function hasLog(): Matcher
     {
         return new Matcher($this->logs, new HasLogsAsserter($this->message));
     }
@@ -35,7 +35,7 @@ class Assert
      */
     public function hasDebug(): Matcher
     {
-        return $this->hasLogs()->withLevel(LogLevel::DEBUG);
+        return $this->hasLog()->withLevel(LogLevel::DEBUG);
     }
 
     /**
@@ -45,7 +45,7 @@ class Assert
      */
     public function hasInfo(): Matcher
     {
-        return $this->hasLogs()->withLevel(LogLevel::INFO);
+        return $this->hasLog()->withLevel(LogLevel::INFO);
     }
 
     /**
@@ -55,7 +55,7 @@ class Assert
      */
     public function hasNotice(): Matcher
     {
-        return $this->hasLogs()->withLevel(LogLevel::NOTICE);
+        return $this->hasLog()->withLevel(LogLevel::NOTICE);
     }
 
     /**
@@ -65,7 +65,7 @@ class Assert
      */
     public function hasWarning(): Matcher
     {
-        return $this->hasLogs()->withLevel(LogLevel::WARNING);
+        return $this->hasLog()->withLevel(LogLevel::WARNING);
     }
 
     /**
@@ -75,7 +75,7 @@ class Assert
      */
     public function hasError(): Matcher
     {
-        return $this->hasLogs()->withLevel(LogLevel::ERROR);
+        return $this->hasLog()->withLevel(LogLevel::ERROR);
     }
 
     /**
@@ -85,7 +85,7 @@ class Assert
      */
     public function hasCritical(): Matcher
     {
-        return $this->hasLogs()->withLevel(LogLevel::CRITICAL);
+        return $this->hasLog()->withLevel(LogLevel::CRITICAL);
     }
 
     /**
@@ -95,7 +95,7 @@ class Assert
      */
     public function hasAlert(): Matcher
     {
-        return $this->hasLogs()->withLevel(LogLevel::ALERT);
+        return $this->hasLog()->withLevel(LogLevel::ALERT);
     }
 
     /**
@@ -105,6 +105,6 @@ class Assert
      */
     public function hasEmergency(): Matcher
     {
-        return $this->hasLogs()->withLevel(LogLevel::EMERGENCY);
+        return $this->hasLog()->withLevel(LogLevel::EMERGENCY);
     }
 }

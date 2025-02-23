@@ -109,7 +109,7 @@ class Matcher
     }
 
     /**
-     * Match logs with context matching provided one, using loose comparison (==).
+     * Match logs with context as provided one, using loose comparison (==).
      *
      * @param array<mixed> $context
      * @return self
@@ -127,7 +127,7 @@ class Matcher
     }
 
     /**
-     * Match logs with context matching provided one, using strict comparison (===).
+     * Match logs with context as provided one, using strict comparison (===).
      *
      * @param array<mixed> $context
      * @return self
@@ -173,9 +173,11 @@ class Matcher
     }
 
     /**
-     * Match logs by callback, for any custom matching. Callback example:
+     * Match logs by callback. Callback example:
      * ```
-     * fn(Log $log) => $log->level === LogLevel::INFO;
+     * function (Log $log): bool {
+     *     return $log->level === LogLevel::INFO;
+     * }
      * ```
      *
      * @param callable(Log): bool $callback Return "true" on match, otherwise "false".

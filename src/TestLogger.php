@@ -42,7 +42,7 @@ class TestLogger extends AbstractLogger
     }
 
     /**
-     * Assert if logger contains logs fulfilling the matching conditions.
+     * Fluent interface to assert logger contains logs with specified conditions.
      *
      * @param string $message Custom assertation error message.
      * @return Assert
@@ -53,7 +53,7 @@ class TestLogger extends AbstractLogger
     }
 
     /**
-     * Filter logs containing in logger that fulfilling the matching conditions.
+     * Fluent interface to filter logs by conditions.
      *
      * @return Filter
      */

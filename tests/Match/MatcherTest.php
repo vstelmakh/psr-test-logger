@@ -144,31 +144,6 @@ class MatcherTest extends TestCase
         self::assertEquals($expected, $actual, 'Unexpected match logs result.');
     }
 
-    public function testWithContextSameAs(): void
-    {
-        $object1 = new \stdClass();
-        $object1->value = 1;
-
-        $object2 = new \stdClass();
-        $object2->value = 1;
-
-        $logs = [
-            new Log(LogLevel::INFO, 'Info message', ['data' => $object1]),
-            new Log(LogLevel::ERROR, 'Error message', ['data' => $object2]),
-        ];
-        $matcher = $this->createMatcher($logs);
-
-        $expected = [new Log(LogLevel::ERROR, 'Error message', ['data' => $object2])];
-        $this->expectAsserterCall($expected, 'context same as [data: {object}]');
-        $match = $matcher->withContextSameAs(['data' => $object2]);
-
-        $matcherLogs = $matcher->getLogs();
-        self::assertSame($logs, $matcherLogs, 'Initial matcher logs modified.');
-
-        $actual = $match->getLogs();
-        self::assertEquals($expected, $actual, 'Unexpected match logs result.');
-    }
-
     public function testWithContextEqualTo(): void
     {
         $object1 = new \stdClass();
@@ -197,17 +172,76 @@ class MatcherTest extends TestCase
         self::assertEquals($expected, $actual, 'Unexpected match logs result.');
     }
 
-    public function testWithContextContains(): void
+    public function testWithContextSameAs(): void
     {
+        $object1 = new \stdClass();
+        $object1->value = 1;
+
+        $object2 = new \stdClass();
+        $object2->value = 1;
+
         $logs = [
-            new Log(LogLevel::INFO, 'Info message', ['data' => 'value info']),
-            new Log(LogLevel::ERROR, 'Error message', ['data' => 'value error']),
+            new Log(LogLevel::INFO, 'Info message', ['data' => $object1]),
+            new Log(LogLevel::ERROR, 'Error message', ['data' => $object2]),
         ];
         $matcher = $this->createMatcher($logs);
 
-        $expected = [new Log(LogLevel::ERROR, 'Error message', ['data' => 'value error'])];
-        $this->expectAsserterCall($expected, 'context contains [data: {string}]');
-        $match = $matcher->withContextContains('data', 'value error');
+        $expected = [new Log(LogLevel::ERROR, 'Error message', ['data' => $object2])];
+        $this->expectAsserterCall($expected, 'context same as [data: {object}]');
+        $match = $matcher->withContextSameAs(['data' => $object2]);
+
+        $matcherLogs = $matcher->getLogs();
+        self::assertSame($logs, $matcherLogs, 'Initial matcher logs modified.');
+
+        $actual = $match->getLogs();
+        self::assertEquals($expected, $actual, 'Unexpected match logs result.');
+    }
+
+    public function testWithContextContainsEqualTo(): void
+    {
+        $object1 = new \stdClass();
+        $object1->value = 1;
+
+        $object2 = new \stdClass();
+        $object2->value = 2;
+
+        $object3 = new \stdClass();
+        $object3->value = 2;
+
+        $logs = [
+            new Log(LogLevel::INFO, 'Info message', ['data' => $object1, 'other' => 'value']),
+            new Log(LogLevel::ERROR, 'Error message', ['data' => $object2, 'other' => 'value']),
+        ];
+        $matcher = $this->createMatcher($logs);
+
+        $expected = [new Log(LogLevel::ERROR, 'Error message', ['data' => $object2, 'other' => 'value'])];
+        $this->expectAsserterCall($expected, 'context contains equal to [data: {object}]');
+        $match = $matcher->withContextContainsEqualTo('data', $object3);
+
+        $matcherLogs = $matcher->getLogs();
+        self::assertSame($logs, $matcherLogs, 'Initial matcher logs modified.');
+
+        $actual = $match->getLogs();
+        self::assertEquals($expected, $actual, 'Unexpected match logs result.');
+    }
+
+    public function testWithContextContainsSameAs(): void
+    {
+        $object1 = new \stdClass();
+        $object1->value = 1;
+
+        $object2 = new \stdClass();
+        $object2->value = 1;
+
+        $logs = [
+            new Log(LogLevel::INFO, 'Info message', ['data' => $object1, 'other' => 'value']),
+            new Log(LogLevel::ERROR, 'Error message', ['data' => $object2, 'other' => 'value']),
+        ];
+        $matcher = $this->createMatcher($logs);
+
+        $expected = [new Log(LogLevel::ERROR, 'Error message', ['data' => $object2, 'other' => 'value'])];
+        $this->expectAsserterCall($expected, 'context contains same as [data: {object}]');
+        $match = $matcher->withContextContainsSameAs('data', $object2);
 
         $matcherLogs = $matcher->getLogs();
         self::assertSame($logs, $matcherLogs, 'Initial matcher logs modified.');

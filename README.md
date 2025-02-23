@@ -10,7 +10,7 @@ It provides seamless integration with [PHPUnit](https://phpunit.de/), making log
 With PSR Test Logger, you can efficiently verify log messages and context, ensuring your application logs expected events without unnecessary complexity.
 
 Key features:
-- **Fluent Interface** - Enables cleaner test assertions and better IDE autocompletion.
+- **Fluent Interface** - Enables cleaner test assertions with intuitive IDE autocompletion.
 - **Predefined Assertions** - A rich set of built-in assertions to validate log messages and contexts.
 - **Automatic PHPUnit Integration** - Works seamlessly within PHPUnit test cases, with zero configuration.
 - **Extensible** - Easily customizable to fit your testing needs.
@@ -60,7 +60,7 @@ class YourServiceTest extends TestCase
         $logger->assert()
             ->hasWarning()
             ->withMessageContains('not found')
-            ->withContextContains('id', 1);
+            ->withContextContainsSameAs('id', 1);
     }
 }
 ```

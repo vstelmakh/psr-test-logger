@@ -16,7 +16,8 @@ Key features:
 - **Automatic PHPUnit Integration** - Works seamlessly within PHPUnit test cases, with zero configuration.
 - **Extensible** - Easily customizable to fit your testing needs.
 
-The main advantage of PSR Test Logger in comparison to mocking logger in your tests is simplicity of development and maintenance.
+If you wonder why not to just mock the logger interface in your tests. The main 🏆 advantage of PSR Test Logger in 
+comparison to mocking logger - is simplicity of development and maintenance.
 For more details and examples see the [Advantages of PSR Test Logger over Mock](./docs/advantages-over-mock.md).
 
 ## Requirements
@@ -56,11 +57,13 @@ class YourServiceTest extends TestCase
         // Thanks to automatic PHPUnit integration,
         // corresponding assertations can be performed as simple as:
 
-        $logger->assert()
+        $logger
+            ->assert()
             ->hasLog()
             ->withMessage('Execution complete.');
 
-        $logger->assert()
+        $logger
+            ->assert()
             ->hasWarning()
             ->withMessageContains('not found')
             ->withContextContainsSameAs('id', 1);
@@ -69,7 +72,7 @@ class YourServiceTest extends TestCase
 ```
 
 > [!TIP]  
-> For all the available methods see [TestLogger](src/TestLogger.php) and [Matcher](src/Match/Matcher.php), it's well documented and easy to follow.  
+> For all the available methods see [Method Reference](./docs/method-reference.md) or check the source code, like [TestLogger](src/TestLogger.php) and [Matcher](src/Match/Matcher.php), it's well documented and easy to follow.
 > Or simply use ⚡ autocompletion of your IDE!
 
 ## Contributing and Support

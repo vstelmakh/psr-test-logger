@@ -21,7 +21,7 @@ class Matcher
     }
 
     /**
-     * Return logs matching conditions.
+     * Return logs that matching previously applied filters.
      *
      * @return array<Log>
      */

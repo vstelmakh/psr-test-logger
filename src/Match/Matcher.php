@@ -14,7 +14,7 @@ class Matcher
      * @internal
      */
     public function __construct(
-        private Collection $logs,
+        private readonly Collection $logs,
         private readonly AsserterInterface $asserter,
     ) {
         $this->asserter->assert($this->logs);

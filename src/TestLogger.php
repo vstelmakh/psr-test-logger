@@ -12,7 +12,7 @@ use VStelmakh\PsrTestLogger\Match\Filter;
 
 class TestLogger extends AbstractLogger
 {
-    private Collection $logs;
+    private readonly Collection $logs;
 
     public function __construct()
     {

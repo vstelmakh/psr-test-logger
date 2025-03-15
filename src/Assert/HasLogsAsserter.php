@@ -13,7 +13,7 @@ class HasLogsAsserter implements AsserterInterface
 {
     /** @var array<string> */
     private array $criteria = [];
-    private string $message;
+    private readonly string $message;
 
     public function __construct(string $message = '')
     {

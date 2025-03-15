@@ -38,7 +38,7 @@ class ContextFormatterTest extends TestCase
             [['bool_false' => false], '[bool_false: false]'],
             [['null' => null], '[null: null]'],
             [['object' => new \stdClass()], '[object: {object}]'],
-            [['array' => ['a' => 34, 'b' => 'value']], '[array: {array}]'],
+            [['array' => ['a' => 34, 'b' => 'value', 'nested' => [1, 2]]], '[array: [a: 34, b: value, nested: [0: 1, 1: 2]]]'],
             [['string' => 'some string', 'object1' => new \stdClass(), 'object2' => new \stdClass()], '[string: some string, object1: {object}, object2: {object}]'],
             [['long_string' => self::LONG_STRING], '[long_string: ' . self::LONG_STRING_TRUNCATED . ']'],
         ];

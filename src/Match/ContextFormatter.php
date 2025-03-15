@@ -35,6 +35,7 @@ class ContextFormatter
             'string', 'double', 'integer' => self::truncate((string) $value),
             'boolean' => $value ? 'true' : 'false',
             'NULL' => 'null',
+            'array' => self::format($value),
             default => sprintf('{%s}', $type),
         };
     }

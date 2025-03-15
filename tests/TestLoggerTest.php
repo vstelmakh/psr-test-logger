@@ -82,6 +82,23 @@ class TestLoggerTest extends TestCase
             ->withCallback(fn($log) => false);
     }
 
+    public function testAssertMultiple(): void
+    {
+        $logger = new TestLogger();
+        $logger->info('This is info message.', ['data' => 'info data']);
+        $logger->error('This is error message.', ['data' => 'error data']);
+
+        $assertHasLog = $logger->assert()->hasLog();
+
+        $assertHasLog
+            ->withMessageContains('info message')
+            ->withContextContainsEqualTo('data', 'info data');
+
+        $assertHasLog
+            ->withMessageContains('error message')
+            ->withContextContainsEqualTo('data', 'error data');
+    }
+
     public function testFilterSuccess(): void
     {
         $logger = new TestLogger();
@@ -100,5 +117,42 @@ class TestLoggerTest extends TestCase
         $actual = $logger->filter()->getAll()->withLevel(LogLevel::ERROR)->getLogs();
         $expected = [];
         self::assertEquals($expected, $actual);
+    }
+
+    public function testFilterMultiple(): void
+    {
+        $logger = new TestLogger();
+        $logger->info('This is info message.', ['data' => 'info data']);
+        $logger->error('This is error message.', ['data' => 'error data']);
+
+        $filterAll = $logger->filter()->getAll();
+        $expected = [
+            new Log(LogLevel::INFO, 'This is info message.', ['data' => 'info data']),
+            new Log(LogLevel::ERROR, 'This is error message.', ['data' => 'error data']),
+        ];
+        $actual = $filterAll->getLogs();
+        self::assertEquals($expected, $actual, 'Unexpected filter all logs result.');
+
+        $expected = [new Log(LogLevel::INFO, 'This is info message.', ['data' => 'info data'])];
+        $actual = $filterAll
+            ->withMessageContains('info message')
+            ->withContextContainsEqualTo('data', 'info data')
+            ->getLogs();
+        self::assertEquals($expected, $actual, 'Unexpected filter info log result.');
+
+        $expected = [new Log(LogLevel::ERROR, 'This is error message.', ['data' => 'error data'])];
+        $actual = $filterAll
+            ->withMessageContains('error message')
+            ->withContextContainsEqualTo('data', 'error data')
+            ->getLogs();
+        self::assertEquals($expected, $actual, 'Unexpected filter error log result.');
+
+        $expected = [];
+        $actual = $filterAll
+            ->withLevel(LogLevel::CRITICAL)
+            ->withMessageContains('error message')
+            ->withContextContainsEqualTo('data', 'error data')
+            ->getLogs();
+        self::assertEquals($expected, $actual, 'Unexpected filter critical log result.');
     }
 }

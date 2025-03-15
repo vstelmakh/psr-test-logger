@@ -12,7 +12,7 @@ use VStelmakh\PsrTestLogger\Match\Filter;
 
 class TestLogger extends AbstractLogger
 {
-    private Collection $logs;
+    private readonly Collection $logs;
 
     public function __construct()
     {
@@ -49,7 +49,7 @@ class TestLogger extends AbstractLogger
      */
     public function assert(string $message = ''): Assert
     {
-        return new Assert(clone $this->logs, $message);
+        return new Assert($this->logs, $message);
     }
 
     /**
@@ -59,6 +59,6 @@ class TestLogger extends AbstractLogger
      */
     public function filter(): Filter
     {
-        return new Filter(clone $this->logs);
+        return new Filter($this->logs);
     }
 }

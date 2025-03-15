@@ -116,12 +116,8 @@ class Matcher
      */
     public function withContextEqualTo(array $context): self
     {
-        $normalizedContext = [];
-        foreach ($context as $key => $value) {
-            $normalizedContext[] = sprintf('%s: {%s}', $key, gettype($value));
-        }
-
-        $criterion = sprintf('context equal to [%s]', implode(', ', $normalizedContext));
+        $formattedContext = ContextFormatter::format($context);
+        $criterion = sprintf('context equal to %s', $formattedContext);
         $callback = fn(Log $log) => $log->context == $context;
         return $this->match($criterion, $callback);
     }
@@ -134,12 +130,8 @@ class Matcher
      */
     public function withContextSameAs(array $context): self
     {
-        $normalizedContext = [];
-        foreach ($context as $key => $value) {
-            $normalizedContext[] = sprintf('%s: {%s}', $key, gettype($value));
-        }
-
-        $criterion = sprintf('context same as [%s]', implode(', ', $normalizedContext));
+        $formattedContext = ContextFormatter::format($context);
+        $criterion = sprintf('context same as %s', $formattedContext);
         $callback = fn(Log $log) => $log->context === $context;
         return $this->match($criterion, $callback);
     }
@@ -153,7 +145,8 @@ class Matcher
      */
     public function withContextContainsEqualTo(mixed $key, mixed $value): self
     {
-        $criterion = sprintf('context contains equal to [%s: {%s}]', $key, gettype($value));
+        $formattedContext = ContextFormatter::format([$key => $value]);
+        $criterion = sprintf('context contains equal to %s', $formattedContext);
         $callback = fn(Log $log) => isset($log->context[$key]) && $log->context[$key] == $value;
         return $this->match($criterion, $callback);
     }
@@ -167,7 +160,8 @@ class Matcher
      */
     public function withContextContainsSameAs(mixed $key, mixed $value): self
     {
-        $criterion = sprintf('context contains same as [%s: {%s}]', $key, gettype($value));
+        $formattedContext = ContextFormatter::format([$key => $value]);
+        $criterion = sprintf('context contains same as %s', $formattedContext);
         $callback = fn(Log $log) => isset($log->context[$key]) && $log->context[$key] === $value;
         return $this->match($criterion, $callback);
     }

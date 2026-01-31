@@ -1,4 +1,4 @@
-<img src="./resources/psr-test-logger-logo.svg" width="301" height="179" alt="PSR Test Logger logo">
+<img src="./resources/psr-test-logger-logo.svg" width="350" height="45" alt="PSR Test Logger logo">
 
 ---
 

@@ -1,4 +1,7 @@
-<img src="./resources/psr-test-logger-logo.svg" width="350" height="45" alt="PSR Test Logger logo">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="resources/psr-test-logger-logo-white.svg">
+  <img src="resources/psr-test-logger-logo-black.svg" width="350" height="45" alt="PSR Test Logger logo">
+</picture>
 
 ---
 

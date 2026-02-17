@@ -9,7 +9,7 @@ use VStelmakh\PsrTestLogger\Log\Collection;
 /**
  * @internal
  */
-class HasLogsAsserter implements AsserterInterface
+final class HasLogsAsserter implements AsserterInterface
 {
     /** @var array<string> */
     private array $criteria = [];

@@ -8,7 +8,7 @@ use Psr\Log\LogLevel;
 use VStelmakh\PsrTestLogger\Assert\NullAsserter;
 use VStelmakh\PsrTestLogger\Log\Collection;
 
-class Filter
+final class Filter
 {
     /**
      * @internal

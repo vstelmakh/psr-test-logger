@@ -7,7 +7,7 @@ namespace VStelmakh\PsrTestLogger\Match;
 /**
  * @internal
  */
-class ContextFormatter
+final class ContextFormatter
 {
     private const VALUE_MAX_LENGTH = 150;
     private const ELLIPSIS = '…';

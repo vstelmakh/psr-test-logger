@@ -7,7 +7,7 @@ namespace VStelmakh\PsrTestLogger\Log;
 /**
  * @internal
  */
-class Collection
+final class Collection
 {
     /** @var array<Log> */
     private array $logs = [];

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace VStelmakh\PsrTestLogger\Log;
 
-class Log
+final class Log
 {
     public function __construct(
         public readonly mixed $level,

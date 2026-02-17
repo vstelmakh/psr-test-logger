@@ -6,15 +6,8 @@
          colors="true"
          bootstrap="vendor/autoload.php"
          cacheDirectory="var/phpunit"
-         failOnRisky="true"
-         failOnDeprecation="true"
-         failOnWarning="true"
-         failOnNotice="true"
-         displayDetailsOnTestsThatTriggerDeprecations="true"
-         displayDetailsOnTestsThatTriggerWarnings="true"
-         displayDetailsOnTestsThatTriggerNotices="true"
-         displayDetailsOnTestsThatTriggerErrors="true"
-         displayDetailsOnPhpunitDeprecations="true"
+         failOnAllIssues="true"
+         displayDetailsOnAllIssues="true"
 >
     <testsuites>
         <testsuite name="default">

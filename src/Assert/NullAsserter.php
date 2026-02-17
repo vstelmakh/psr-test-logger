@@ -9,7 +9,7 @@ use VStelmakh\PsrTestLogger\Log\Collection;
 /**
  * @internal
  */
-class NullAsserter implements AsserterInterface
+final class NullAsserter implements AsserterInterface
 {
     public function assert(Collection $logs): void
     {

@@ -8,7 +8,7 @@ use VStelmakh\PsrTestLogger\Assert\AsserterInterface;
 use VStelmakh\PsrTestLogger\Log\Collection;
 use VStelmakh\PsrTestLogger\Log\Log;
 
-class Matcher
+final class Matcher
 {
     /**
      * @internal

@@ -4,14 +4,17 @@ declare(strict_types=1);
 
 namespace VStelmakh\PsrTestLogger;
 
-use Psr\Log\AbstractLogger;
+use Psr\Log\LoggerInterface;
+use Psr\Log\LoggerTrait;
 use VStelmakh\PsrTestLogger\Log\Collection;
 use VStelmakh\PsrTestLogger\Log\Log;
 use VStelmakh\PsrTestLogger\Match\Assert;
 use VStelmakh\PsrTestLogger\Match\Filter;
 
-class TestLogger extends AbstractLogger
+final class TestLogger implements LoggerInterface
 {
+    use LoggerTrait;
+
     private readonly Collection $logs;
 
     public function __construct()

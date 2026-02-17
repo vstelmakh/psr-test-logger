@@ -8,7 +8,7 @@ use Psr\Log\LogLevel;
 use VStelmakh\PsrTestLogger\Assert\HasLogsAsserter;
 use VStelmakh\PsrTestLogger\Log\Collection;
 
-class Assert
+final class Assert
 {
     /**
      * @internal

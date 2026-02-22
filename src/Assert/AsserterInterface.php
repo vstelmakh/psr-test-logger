@@ -12,7 +12,7 @@ use VStelmakh\PsrTestLogger\Log\Collection;
 interface AsserterInterface
 {
     /**
-     * Assert provided collection in compliance with asserter requirements.
+     * Assert a provided collection in compliance with asserter requirements.
      *
      * @param Collection $logs
      * @return void
@@ -20,7 +20,7 @@ interface AsserterInterface
     public function assert(Collection $logs): void;
 
     /**
-     * Add matching criterion to the matcher.
+     * Add a matching criterion to the matcher.
      *
      * @param string $criterion
      * @return void

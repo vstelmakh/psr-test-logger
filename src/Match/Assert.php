@@ -19,7 +19,7 @@ final class Assert
     ) {}
 
     /**
-     * Assert logger contains logs.
+     * Assert that the logger contains (any) logs.
      *
      * @return Matcher
      */
@@ -29,7 +29,7 @@ final class Assert
     }
 
     /**
-     * Assert logger contains logs with level "debug".
+     * Assert that the logger contains logs with the level "debug".
      *
      * @return Matcher
      */
@@ -39,7 +39,7 @@ final class Assert
     }
 
     /**
-     * Assert logger contains logs with level "info".
+     * Assert that the logger contains logs with the level "info".
      *
      * @return Matcher
      */
@@ -49,7 +49,7 @@ final class Assert
     }
 
     /**
-     * Assert logger contains logs with level "notice".
+     * Assert that the logger contains logs with the level "notice".
      *
      * @return Matcher
      */
@@ -59,7 +59,7 @@ final class Assert
     }
 
     /**
-     * Assert logger contains logs with level "warning".
+     * Assert that the logger contains logs with the level "warning".
      *
      * @return Matcher
      */
@@ -69,7 +69,7 @@ final class Assert
     }
 
     /**
-     * Assert logger contains logs with level "error".
+     * Assert that the logger contains logs with the level "error".
      *
      * @return Matcher
      */
@@ -79,7 +79,7 @@ final class Assert
     }
 
     /**
-     * Assert logger contains logs with level "critical".
+     * Assert that the logger contains logs with the level "critical".
      *
      * @return Matcher
      */
@@ -89,7 +89,7 @@ final class Assert
     }
 
     /**
-     * Assert logger contains logs with level "alert".
+     * Assert that the logger contains logs with the level "alert".
      *
      * @return Matcher
      */
@@ -99,7 +99,7 @@ final class Assert
     }
 
     /**
-     * Assert logger contains logs with level "emergency".
+     * Assert that the logger contains logs with the level "emergency".
      *
      * @return Matcher
      */

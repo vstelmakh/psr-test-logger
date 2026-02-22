@@ -28,7 +28,7 @@ final class Filter
     }
 
     /**
-     * Filter logs with level "debug".
+     * Filter logs with the level "debug".
      *
      * @return Matcher
      */
@@ -38,7 +38,7 @@ final class Filter
     }
 
     /**
-     * Filter logs with level "info".
+     * Filter logs with the level "info".
      *
      * @return Matcher
      */
@@ -48,7 +48,7 @@ final class Filter
     }
 
     /**
-     * Filter logs with level "notice".
+     * Filter logs with the level "notice".
      *
      * @return Matcher
      */
@@ -58,7 +58,7 @@ final class Filter
     }
 
     /**
-     * Filter logs with level "warning".
+     * Filter logs with the level "warning".
      *
      * @return Matcher
      */
@@ -68,7 +68,7 @@ final class Filter
     }
 
     /**
-     * Filter logs with level "error".
+     * Filter logs with the level "error".
      *
      * @return Matcher
      */
@@ -78,7 +78,7 @@ final class Filter
     }
 
     /**
-     * Filter logs with level "critical".
+     * Filter logs with the level "critical".
      *
      * @return Matcher
      */
@@ -88,7 +88,7 @@ final class Filter
     }
 
     /**
-     * Filter logs with level "alert".
+     * Filter logs with the level "alert".
      *
      * @return Matcher
      */
@@ -98,7 +98,7 @@ final class Filter
     }
 
     /**
-     * Filter logs with level "emergency".
+     * Filter logs with the level "emergency".
      *
      * @return Matcher
      */

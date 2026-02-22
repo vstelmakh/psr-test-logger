@@ -1,5 +1,5 @@
 # Advantages of PSR Test Logger over mocking LoggerInterface
-Using **PSR Test Logger** library instead of creating mocks with PHPUnit offers several benefits, such as:
+Using **PSR Test Logger** library instead of creating mocks with PHPUnit offers several benefits, such as
 simplified assertions, decoupling from implementation details and easier maintenance.
 
 ## Simplified Assertions

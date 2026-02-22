@@ -1,7 +1,7 @@
 # PSR Test Logger Method Reference
-[TestLogger](../src/TestLogger.php) class consists with 3 main parts:
-1. **Logger** - an implementation of `Psr\Log\LoggerInterface` interface. Allows to act as a logger for all the places where
-   LoggerInterface is required.
+[TestLogger](../src/TestLogger.php) class consists of three main parts:
+1. **Logger** - an implementation of `Psr\Log\LoggerInterface` interface. Allows acting as a logger for all the places 
+   where LoggerInterface is required.
 2. **Assert** - fluent interface to assert log records with conditions provided by [Matcher](../src/Match/Matcher.php).
 3. **Filter** - fluent interface to filter log records with conditions provided by [Matcher](../src/Match/Matcher.php).
 
@@ -27,7 +27,7 @@
 * `hasAlert` - Assert logger contains logs with level "alert".
 * `hasEmergency` - Assert logger contains logs with level "emergency".
 
-All of the `assert` methods returns [Matcher](../src/Match/Matcher.php), which allows to specify more assert conditions 
+All of the `assert` methods returns [Matcher](../src/Match/Matcher.php), which allows specifying more assertion conditions 
 by simply chaining methods from matcher. For available methods and examples see [mather reference](#matcher-reference) below.
 
 ## Filter Reference
@@ -41,7 +41,7 @@ by simply chaining methods from matcher. For available methods and examples see 
 * `getAlert` - Filter logs with level "alert".
 * `getEmergency` - Filter logs with level "emergency".
 
-All of the `filter` methods returns [Matcher](../src/Match/Matcher.php), which allows to specify more filter conditions
+All of the `filter` methods returns [Matcher](../src/Match/Matcher.php), which allows specifying more filter conditions
 by simply chaining methods from matcher. For available methods and examples see [mather reference](#matcher-reference) below.
 
 ## Matcher Reference
@@ -79,7 +79,7 @@ $logs = $logger->filter()->getAll()->withMessage('This is info message.')->getLo
 > The above methods could be 🔗 chained to define more strict matching criteria.
 
 ### getLogs
-Return logs that matching previously applied filters. Could be useful when there is a need for additional
+Return logs that match previously applied filters. Could be useful when there is a need for additional
 custom assertions on filtered log messages. Returns `array<Log>` – array of [Log](../src/Log/Log.php) objects.
 
 ```php
@@ -104,7 +104,7 @@ $logs = $logger->filter()->getError()->getLogs();
 ```
 
 ### withLevel
-Match logs with specified log level.
+Match logs with a specified log level.
 
 ```php
 use Psr\Log\LogLevel;
@@ -116,7 +116,7 @@ $logger->assert()->hasLog()->withLevel(LogLevel::INFO);
 ```
 
 ### withMessage
-Match logs with specified message.
+Match logs with a specified message.
 
 ```php
 use VStelmakh\PsrTestLogger\TestLogger;
@@ -127,7 +127,7 @@ $logger->assert()->hasLog()->withMessage('This is info message.');
 ```
 
 ### withMessageContains
-Match logs with message contains substring.
+Match logs with a message containing a substring.
 
 ```php
 use VStelmakh\PsrTestLogger\TestLogger;
@@ -138,7 +138,7 @@ $logger->assert()->hasLog()->withMessageContains('info message');
 ```
 
 ### withMessageContainsIgnoreCase
-Match logs with message contains substring (case-insensitive).
+Match logs with a message contain substring (case-insensitive).
 
 ```php
 use VStelmakh\PsrTestLogger\TestLogger;
@@ -149,7 +149,7 @@ $logger->assert()->hasLog()->withMessageContainsIgnoreCase('INFO message');
 ```
 
 ### withMessageStartsWith
-Match logs with message starts with prefix.
+Match logs with a message starting with the prefix.
 
 ```php
 use VStelmakh\PsrTestLogger\TestLogger;
@@ -160,7 +160,7 @@ $logger->assert()->hasLog()->withMessageStartsWith('This is info');
 ```
 
 ### withMessageMatches
-Match logs with message matching regular expression.
+Match logs with a message matching regular expression.
 
 ```php
 use VStelmakh\PsrTestLogger\TestLogger;
@@ -182,7 +182,7 @@ $logger->assert()->hasLog()->withContextEqualTo(['some' => 'data']);
 ```
 
 ### withContextSameAs
-Match logs with context as provided one, using strict comparison (===). Useful to check if object is the same instance.
+Match logs with context as provided one, using strict comparison (===). Useful to check if an object is the same instance.
 
 ```php
 use VStelmakh\PsrTestLogger\TestLogger;
@@ -194,7 +194,7 @@ $logger->assert()->hasLog()->withContextSameAs(['some' => $data]);
 ```
 
 ### withContextContainsEqualTo
-Match logs with context contains key-value pair, using loose comparison (==).
+Match logs with context contain a key-value pair, using loose comparison (==).
 
 ```php
 use VStelmakh\PsrTestLogger\TestLogger;
@@ -205,7 +205,7 @@ $logger->assert()->hasLog()->withContextContainsEqualTo('some', 'data');
 ```
 
 ### withContextContainsSameAs
-Match logs with context contains key-value pair, using loose comparison (==). Useful to check if object is the same instance.
+Match logs with context contain a key-value pair, using loose comparison (==). Useful to check if an object is the same instance.
 
 ```php
 use VStelmakh\PsrTestLogger\TestLogger;

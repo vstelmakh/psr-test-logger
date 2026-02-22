@@ -1,12 +1,12 @@
 # Changelog
-All notable changes to this project documented in this file.  
+All notable changes to this project are documented in this file.  
 Releases are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html) specification.
 
 ### v1.0.1
 Date: `2025-03-15`
 
 Changes:
-- Added context formatter to make context related assertion messages more verbose.
+- Added context formatter to make context-related assertion messages more verbose.
 
 Example:
 ```php

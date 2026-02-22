@@ -31,7 +31,7 @@ final class Matcher
     }
 
     /**
-     * Match logs with specified log level.
+     * Match logs with a specified log level.
      *
      * @param mixed $level
      * @return self
@@ -44,7 +44,7 @@ final class Matcher
     }
 
     /**
-     * Match logs with specified message.
+     * Match logs with a specified message.
      *
      * @param string $message
      * @return self
@@ -57,7 +57,7 @@ final class Matcher
     }
 
     /**
-     * Match logs with message contains substring.
+     * Match logs with a message containing a substring.
      *
      * @param string $needle
      * @return self
@@ -70,7 +70,7 @@ final class Matcher
     }
 
     /**
-     * Match logs with message contains substring (case-insensitive).
+     * Match logs with a message contain substring (case-insensitive).
      *
      * @param string $needle
      * @return self
@@ -83,7 +83,7 @@ final class Matcher
     }
 
     /**
-     * Match logs with message starts with prefix.
+     * Match logs with a message starting with the prefix.
      *
      * @param string $prefix
      * @return self
@@ -96,7 +96,7 @@ final class Matcher
     }
 
     /**
-     * Match logs with message matching regular expression.
+     * Match logs with a message matching regular expression.
      *
      * @param string $pattern RegEx pattern. Example value: "/^error/i".
      * @return self
@@ -137,7 +137,7 @@ final class Matcher
     }
 
     /**
-     * Match logs with context contains key-value pair, using loose comparison (==).
+     * Match logs with context contain a key-value pair, using loose comparison (==).
      *
      * @param mixed $key
      * @param mixed $value
@@ -152,7 +152,7 @@ final class Matcher
     }
 
     /**
-     * Match logs with context contains key-value pair, using strict comparison (===).
+     * Match logs with context contain a key-value pair, using strict comparison (===).
      *
      * @param mixed $key
      * @param mixed $value
@@ -174,7 +174,7 @@ final class Matcher
      * }
      * ```
      *
-     * @param callable(Log): bool $callback Return "true" on match, otherwise "false".
+     * @param callable(Log): bool $callback Return "true" on a match, otherwise "false".
      * @return self
      */
     public function withCallback(callable $callback): self

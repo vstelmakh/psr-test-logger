@@ -13,7 +13,7 @@ final class Collection
     private array $logs = [];
 
     /**
-     * Add log record to collection.
+     * Add log record to a collection.
      *
      * @param Log $log
      * @return void
@@ -24,7 +24,7 @@ final class Collection
     }
 
     /**
-     * Returns count of log records in collection.
+     * Returns count of log records in a collection.
      *
      * @return int
      */
@@ -34,7 +34,7 @@ final class Collection
     }
 
     /**
-     * Returns "true" if collection is empty, otherwise "false".
+     * Returns "true" if a collection is empty, otherwise "false".
      *
      * @return bool
      */
@@ -44,7 +44,7 @@ final class Collection
     }
 
     /**
-     * Returns all collection records as array.
+     * Returns all collection records as an array.
      *
      * @return array<Log>
      */
@@ -54,7 +54,7 @@ final class Collection
     }
 
     /**
-     * Filter collection with provided callback.
+     * Filter the collection with the provided callback.
      *
      * @param callable(Log): bool $callback
      */

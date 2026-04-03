@@ -56,14 +56,14 @@ class TestLoggerTest extends TestCase
         ];
     }
 
-    public function testAssertSuccess(): void
+    public function testAssertHasSuccess(): void
     {
         $logger = new TestLogger();
         $logger->info('This is test message.');
         $logger->assert()->hasLog();
     }
 
-    public function testAssertFail(): void
+    public function testAssertHasFail(): void
     {
         $logger = new TestLogger();
         $logger->info('This is test message.');
@@ -82,7 +82,7 @@ class TestLoggerTest extends TestCase
             ->withCallback(fn($log) => false);
     }
 
-    public function testAssertMultiple(): void
+    public function testAssertHasMultiple(): void
     {
         $logger = new TestLogger();
         $logger->info('This is info message.', ['data' => 'info data']);
@@ -95,6 +95,53 @@ class TestLoggerTest extends TestCase
             ->withContextContainsEqualTo('data', 'info data');
 
         $assertHasLog
+            ->withMessageContains('error message')
+            ->withContextContainsEqualTo('data', 'error data');
+    }
+
+    public function testAssertHasNoSuccess(): void
+    {
+        $logger = new TestLogger();
+        $logger->info('This is test message.', ['some' => 'data']);
+        $logger
+            ->assert()
+            ->hasNoLog()
+            ->withMessage('This is test message.')
+            ->withContextContainsSameAs('other', 'data');
+    }
+
+    public function testAssertHasNoFail(): void
+    {
+        $logger = new TestLogger();
+        $logger->info('This is test message.', ['some' => 'data']);
+
+        $this->expectException(AssertionFailedError::class);
+        $this->expectExceptionMessage(
+            'Custom assertation error message.'
+            . PHP_EOL
+            . 'Failed asserting that has no logs matching level "info" and message "This is test message." and context contains same as [some: data].',
+        );
+
+        $logger
+            ->assert('Custom assertation error message.')
+            ->hasNoInfo()
+            ->withMessage('This is test message.')
+            ->withContextContainsSameAs('some', 'data');
+    }
+
+    public function testAssertHasNoMultiple(): void
+    {
+        $logger = new TestLogger();
+        $logger->info('This is info message.', ['data' => 'info data']);
+        $logger->error('This is error message.', ['data' => 'error data']);
+
+        $assertHasNoNotice = $logger->assert()->hasNoNotice();
+
+        $assertHasNoNotice
+            ->withMessageContains('info message')
+            ->withContextContainsEqualTo('data', 'info data');
+
+        $assertHasNoNotice
             ->withMessageContains('error message')
             ->withContextContainsEqualTo('data', 'error data');
     }

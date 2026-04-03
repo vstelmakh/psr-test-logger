@@ -6,6 +6,7 @@ namespace VStelmakh\PsrTestLogger\Match;
 
 use Psr\Log\LogLevel;
 use VStelmakh\PsrTestLogger\Assert\HasLogsAsserter;
+use VStelmakh\PsrTestLogger\Assert\HasNoLogsAsserter;
 use VStelmakh\PsrTestLogger\Log\Collection;
 
 final class Assert
@@ -26,6 +27,17 @@ final class Assert
     public function hasLog(): Matcher
     {
         return new Matcher($this->logs, new HasLogsAsserter($this->message));
+    }
+
+    /**
+     * Assert that the logger contains no logs matching the applied filters.
+     * Assertion is deferred until the end of the filter chain.
+     *
+     * @return NegativeMatcher
+     */
+    public function hasNoLog(): NegativeMatcher
+    {
+        return new NegativeMatcher($this->logs, new HasNoLogsAsserter($this->message));
     }
 
     /**
@@ -106,5 +118,93 @@ final class Assert
     public function hasEmergency(): Matcher
     {
         return $this->hasLog()->withLevel(LogLevel::EMERGENCY);
+    }
+
+    /**
+     * Assert that the logger contains no logs with the level "debug" matching the applied filters.
+     * Assertion is deferred until the end of the filter chain.
+     *
+     * @return NegativeMatcher
+     */
+    public function hasNoDebug(): NegativeMatcher
+    {
+        return $this->hasNoLog()->withLevel(LogLevel::DEBUG);
+    }
+
+    /**
+     * Assert that the logger contains no logs with the level "info" matching the applied filters.
+     * Assertion is deferred until the end of the filter chain.
+     *
+     * @return NegativeMatcher
+     */
+    public function hasNoInfo(): NegativeMatcher
+    {
+        return $this->hasNoLog()->withLevel(LogLevel::INFO);
+    }
+
+    /**
+     * Assert that the logger contains no logs with the level "notice" matching the applied filters.
+     * Assertion is deferred until the end of the filter chain.
+     *
+     * @return NegativeMatcher
+     */
+    public function hasNoNotice(): NegativeMatcher
+    {
+        return $this->hasNoLog()->withLevel(LogLevel::NOTICE);
+    }
+
+    /**
+     * Assert that the logger contains no logs with the level "warning" matching the applied filters.
+     * Assertion is deferred until the end of the filter chain.
+     *
+     * @return NegativeMatcher
+     */
+    public function hasNoWarning(): NegativeMatcher
+    {
+        return $this->hasNoLog()->withLevel(LogLevel::WARNING);
+    }
+
+    /**
+     * Assert that the logger contains no logs with the level "error" matching the applied filters.
+     * Assertion is deferred until the end of the filter chain.
+     *
+     * @return NegativeMatcher
+     */
+    public function hasNoError(): NegativeMatcher
+    {
+        return $this->hasNoLog()->withLevel(LogLevel::ERROR);
+    }
+
+    /**
+     * Assert that the logger contains no logs with the level "critical" matching the applied filters.
+     * Assertion is deferred until the end of the filter chain.
+     *
+     * @return NegativeMatcher
+     */
+    public function hasNoCritical(): NegativeMatcher
+    {
+        return $this->hasNoLog()->withLevel(LogLevel::CRITICAL);
+    }
+
+    /**
+     * Assert that the logger contains no logs with the level "alert" matching the applied filters.
+     * Assertion is deferred until the end of the filter chain.
+     *
+     * @return NegativeMatcher
+     */
+    public function hasNoAlert(): NegativeMatcher
+    {
+        return $this->hasNoLog()->withLevel(LogLevel::ALERT);
+    }
+
+    /**
+     * Assert that the logger contains no logs with the level "emergency" matching the applied filters.
+     * Assertion is deferred until the end of the filter chain.
+     *
+     * @return NegativeMatcher
+     */
+    public function hasNoEmergency(): NegativeMatcher
+    {
+        return $this->hasNoLog()->withLevel(LogLevel::EMERGENCY);
     }
 }

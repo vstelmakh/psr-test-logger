@@ -10,14 +10,30 @@ use VStelmakh\PsrTestLogger\Log\Log;
 
 final class Matcher
 {
+    private bool $consumed = false;
+
     /**
      * @internal
      */
     public function __construct(
         private readonly Collection $logs,
         private readonly AsserterInterface $asserter,
-    ) {
-        $this->asserter->assert($this->logs);
+    ) {}
+
+    /**
+     * Triggers the assertion at the end of the filter chain.
+     *
+     * Assertion is deferred to the destructor so that all filters are applied before asserting. Each call to
+     * a filter method (e.g. {@see withLevel()}, {@see withMessageContains()}) marks the current instance
+     * as consumed and returns a new instance with the narrowed log collection. Only the final, unconsumed instance
+     * at the end of the chain calls {@see AsserterInterface::assert()}, which either passes or fails the test
+     * based on the fully-filtered collection.
+     */
+    public function __destruct()
+    {
+        if (!$this->consumed) {
+            $this->asserter->assert($this->logs);
+        }
     }
 
     /**
@@ -188,6 +204,7 @@ final class Matcher
      */
     private function match(string $criterion, callable $callback): self
     {
+        $this->consumed = true;
         $logs = $this->logs->filter($callback);
         $asserter = clone $this->asserter;
         $asserter->addCriterion($criterion);

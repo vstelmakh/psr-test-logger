@@ -30,17 +30,6 @@ final class Assert
     }
 
     /**
-     * Assert that the logger contains no logs matching the applied filters.
-     * Assertion is deferred until the end of the filter chain.
-     *
-     * @return NegativeMatcher
-     */
-    public function hasNoLog(): NegativeMatcher
-    {
-        return new NegativeMatcher($this->logs, new HasNoLogsAsserter($this->message));
-    }
-
-    /**
      * Assert that the logger contains logs with the level "debug".
      *
      * @return Matcher
@@ -121,89 +110,91 @@ final class Assert
     }
 
     /**
-     * Assert that the logger contains no logs with the level "debug" matching the applied filters.
-     * Assertion is deferred until the end of the filter chain.
+     * Assert that the logger contains no logs matching the applied filters.
      *
-     * @return NegativeMatcher
+     * @return Matcher
      */
-    public function hasNoDebug(): NegativeMatcher
+    public function hasNoLog(): Matcher
+    {
+        return new Matcher($this->logs, new HasNoLogsAsserter($this->message));
+    }
+
+    /**
+     * Assert that the logger contains no logs with the level "debug" matching the applied filters.
+     *
+     * @return Matcher
+     */
+    public function hasNoDebug(): Matcher
     {
         return $this->hasNoLog()->withLevel(LogLevel::DEBUG);
     }
 
     /**
      * Assert that the logger contains no logs with the level "info" matching the applied filters.
-     * Assertion is deferred until the end of the filter chain.
      *
-     * @return NegativeMatcher
+     * @return Matcher
      */
-    public function hasNoInfo(): NegativeMatcher
+    public function hasNoInfo(): Matcher
     {
         return $this->hasNoLog()->withLevel(LogLevel::INFO);
     }
 
     /**
      * Assert that the logger contains no logs with the level "notice" matching the applied filters.
-     * Assertion is deferred until the end of the filter chain.
      *
-     * @return NegativeMatcher
+     * @return Matcher
      */
-    public function hasNoNotice(): NegativeMatcher
+    public function hasNoNotice(): Matcher
     {
         return $this->hasNoLog()->withLevel(LogLevel::NOTICE);
     }
 
     /**
      * Assert that the logger contains no logs with the level "warning" matching the applied filters.
-     * Assertion is deferred until the end of the filter chain.
      *
-     * @return NegativeMatcher
+     * @return Matcher
      */
-    public function hasNoWarning(): NegativeMatcher
+    public function hasNoWarning(): Matcher
     {
         return $this->hasNoLog()->withLevel(LogLevel::WARNING);
     }
 
     /**
      * Assert that the logger contains no logs with the level "error" matching the applied filters.
-     * Assertion is deferred until the end of the filter chain.
      *
-     * @return NegativeMatcher
+     * @return Matcher
      */
-    public function hasNoError(): NegativeMatcher
+    public function hasNoError(): Matcher
     {
         return $this->hasNoLog()->withLevel(LogLevel::ERROR);
     }
 
     /**
      * Assert that the logger contains no logs with the level "critical" matching the applied filters.
-     * Assertion is deferred until the end of the filter chain.
      *
-     * @return NegativeMatcher
+     * @return Matcher
      */
-    public function hasNoCritical(): NegativeMatcher
+    public function hasNoCritical(): Matcher
     {
         return $this->hasNoLog()->withLevel(LogLevel::CRITICAL);
     }
 
     /**
      * Assert that the logger contains no logs with the level "alert" matching the applied filters.
-     * Assertion is deferred until the end of the filter chain.
      *
-     * @return NegativeMatcher
+     * @return Matcher
      */
-    public function hasNoAlert(): NegativeMatcher
+    public function hasNoAlert(): Matcher
     {
         return $this->hasNoLog()->withLevel(LogLevel::ALERT);
     }
 
     /**
      * Assert that the logger contains no logs with the level "emergency" matching the applied filters.
-     * Assertion is deferred until the end of the filter chain.
      *
-     * @return NegativeMatcher
+     * @return Matcher
      */
-    public function hasNoEmergency(): NegativeMatcher
+    public function hasNoEmergency(): Matcher
     {
         return $this->hasNoLog()->withLevel(LogLevel::EMERGENCY);
     }

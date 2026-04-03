@@ -29,7 +29,7 @@ class FilterTest extends TestCase
 
         $assert = new Filter($logs);
         /** @var Matcher $matcher */
-        $matcher = $assert->{$method}();
+        $matcher = $assert->{$method}(); // @phpstan-ignore-line
         $actual = $matcher->getLogs();
         self::assertEquals($expected, $actual);
     }

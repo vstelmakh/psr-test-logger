@@ -30,7 +30,7 @@ class AssertTest extends TestCase
         }
 
         $assert = new Assert($logs, $message);
-        $assert->{$method}();
+        $assert->{$method}(); // @phpstan-ignore-line
     }
 
     public static function hasProvider(): array

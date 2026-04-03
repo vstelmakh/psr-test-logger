@@ -20,11 +20,13 @@ final class HasLogsAsserter implements AsserterInterface
         $this->message = $message;
     }
 
+    #[\Override]
     public function assert(Collection $logs): void
     {
         $logs->isEmpty() ? PHPUnitAssertProxy::fail($this->getMessage()) : PHPUnitAssertProxy::success();
     }
 
+    #[\Override]
     public function addCriterion(string $criterion): void
     {
         $this->criteria[] = $criterion;
@@ -34,7 +36,7 @@ final class HasLogsAsserter implements AsserterInterface
     {
         $prefix = $this->message !== '' ? $this->message . PHP_EOL : '';
 
-        if (empty($this->criteria)) {
+        if ($this->criteria === []) {
             return sprintf('%sFailed asserting that has logs.', $prefix);
         }
 

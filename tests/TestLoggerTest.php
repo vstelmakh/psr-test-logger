@@ -35,7 +35,7 @@ class TestLoggerTest extends TestCase
     public function testLogLevel(string $method, string $level): void
     {
         $logger = new TestLogger();
-        $logger->{$method}('This is test message.', ['some' => 'data']);
+        $logger->{$method}('This is test message.', ['some' => 'data']); // @phpstan-ignore-line
 
         $actual = $logger->getLogs();
         $expected = [new Log($level, 'This is test message.', ['some' => 'data'])];

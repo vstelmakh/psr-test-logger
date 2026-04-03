@@ -270,12 +270,14 @@ class MatcherTest extends TestCase
         self::assertEquals($expected, $actual, 'Unexpected match logs result.');
     }
 
+    #[\Override]
     protected function setUp(): void
     {
         parent::setUp();
         $this->asserter = $this->createMock(AsserterInterface::class);
     }
 
+    #[\Override]
     protected function tearDown(): void
     {
         parent::tearDown();
@@ -307,7 +309,7 @@ class MatcherTest extends TestCase
 
         if ($criterion !== null) {
             $this->asserter
-                ->expects($this->once())
+                ->expects(self::once())
                 ->method('addCriterion')
                 ->with(
                     self::callback(function ($value) use ($criterion): bool {
@@ -318,7 +320,7 @@ class MatcherTest extends TestCase
         }
 
         $this->asserter
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('assert')
             ->with(
                 self::callback(function ($value) use ($collection): bool {

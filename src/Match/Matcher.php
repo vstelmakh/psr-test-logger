@@ -118,7 +118,7 @@ final class Matcher
     {
         $formattedContext = ContextFormatter::format($context);
         $criterion = sprintf('context equal to %s', $formattedContext);
-        $callback = fn(Log $log) => $log->context == $context;
+        $callback = fn(Log $log) => $log->context == $context; // @phpstan-ignore-line
         return $this->match($criterion, $callback);
     }
 
@@ -147,7 +147,7 @@ final class Matcher
     {
         $formattedContext = ContextFormatter::format([$key => $value]);
         $criterion = sprintf('context contains equal to %s', $formattedContext);
-        $callback = fn(Log $log) => isset($log->context[$key]) && $log->context[$key] == $value;
+        $callback = fn(Log $log) => isset($log->context[$key]) && $log->context[$key] == $value; // @phpstan-ignore-line
         return $this->match($criterion, $callback);
     }
 

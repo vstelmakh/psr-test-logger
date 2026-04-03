@@ -17,6 +17,7 @@
 * `emergency` - Log with emergency level.
 
 ## Assert Reference
+Positive assertions — assert that matching logs **exist**:
 * `hasLog` - Assert logger contains logs.
 * `hasDebug` - Assert logger contains logs with level "debug".
 * `hasInfo` - Assert logger contains logs with level "info".
@@ -27,7 +28,18 @@
 * `hasAlert` - Assert logger contains logs with level "alert".
 * `hasEmergency` - Assert logger contains logs with level "emergency".
 
-All of the `assert` methods returns [Matcher](../src/Match/Matcher.php), which allows specifying more assertion conditions 
+Negative assertions — assert that matching logs **do not exist**:
+* `hasNoLog` - Assert logger contains no logs.
+* `hasNoDebug` - Assert logger contains no logs with level "debug".
+* `hasNoInfo` - Assert logger contains no logs with level "info".
+* `hasNoNotice` - Assert logger contains no logs with level "notice".
+* `hasNoWarning` - Assert logger contains no logs with level "warning".
+* `hasNoError` - Assert logger contains no logs with level "error".
+* `hasNoCritical` - Assert logger contains no logs with level "critical".
+* `hasNoAlert` - Assert logger contains no logs with level "alert".
+* `hasNoEmergency` - Assert logger contains no logs with level "emergency".
+
+All of the `assert` methods returns [Matcher](../src/Match/Matcher.php), which allows specifying more assertion conditions
 by simply chaining methods from matcher. For available methods and examples see [mather reference](#matcher-reference) below.
 
 ## Filter Reference

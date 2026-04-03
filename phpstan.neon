@@ -1,3 +1,6 @@
+includes:
+  - vendor/phpstan/phpstan-strict-rules/rules.neon
+
 parameters:
   level: 8
   tmpDir: var/phpstan
@@ -6,6 +9,11 @@ parameters:
     - tests
 
   reportUnmatchedIgnoredErrors: true
+  checkDynamicProperties: true
+  reportNonIntStringArrayKey: true
+  checkMissingOverrideMethodAttribute: true
+  checkStrictPrintfPlaceholderTypes: true
+
   ignoreErrors:
     - identifier: missingType.iterableValue
       path: tests/*Test.php

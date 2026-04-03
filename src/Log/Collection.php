@@ -40,7 +40,7 @@ final class Collection
      */
     public function isEmpty(): bool
     {
-        return empty($this->logs);
+        return $this->logs === [];
     }
 
     /**

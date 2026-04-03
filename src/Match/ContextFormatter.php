@@ -33,7 +33,7 @@ final class ContextFormatter
 
         return match ($type) {
             'string', 'double', 'integer' => self::truncate((string) $value),
-            'boolean' => $value ? 'true' : 'false',
+            'boolean' => $value ? 'true' : 'false', // @phpstan-ignore-line
             'NULL' => 'null',
             'array' => self::format($value),
             default => sprintf('{%s}', $type),

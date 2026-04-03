@@ -28,6 +28,7 @@ final class TestLogger implements LoggerInterface
      * @param array<mixed> $context
      * @return void
      */
+    #[\Override]
     public function log($level, \Stringable|string $message, array $context = []): void
     {
         $log = new Log($level, $message, $context);
